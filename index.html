@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Model UN — Braun Brody & Baron Block</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a1628;
+      --deep: #061020;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --ivory: #f5f0e8;
+      --cream: #ede8dc;
+      --slate: #8a9ab0;
+      --white: #ffffff;
+      --text: #d4cec3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--deep);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      height: 70px;
+      background: rgba(6,16,32,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .nav-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 400;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.25s;
+      cursor: pointer;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+    /* ─── PAGES ─── */
+    .page { display: none; padding-top: 70px; min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* ─── HERO ─── */
+    #home {
+      position: relative;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    .globe-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 20%, rgba(10,22,40,0.9) 0%, transparent 60%),
+        linear-gradient(170deg, var(--deep) 0%, var(--navy) 100%);
+      z-index: 0;
+    }
+    .globe-lines {
+      position: absolute; inset: 0; z-index: 0; opacity: 0.08;
+      background-image:
+        repeating-linear-gradient(0deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 60px),
+        repeating-linear-gradient(90deg, var(--gold) 0, var(--gold) 1px, transparent 1px, transparent 60px);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 820px; padding: 2rem; }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 700;
+      color: var(--ivory);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+    .hero-title span { color: var(--gold); }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      font-style: italic;
+      color: var(--slate);
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .hero-divider {
+      width: 80px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2.5rem;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+    .hero-names {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.6s ease both;
+    }
+    .btn-primary {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.2rem;
+      background: var(--gold);
+      color: var(--deep);
+      border: none; cursor: pointer;
+      font-weight: 700;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.2rem;
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-outline:hover { background: rgba(201,168,76,0.1); transform: translateY(-2px); }
+
+    /* ─── ABOUT ─── */
+    #about {
+      padding: 6rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--ivory);
+      margin-bottom: 1.5rem;
+    }
+    .section-divider {
+      width: 60px; height: 2px;
+      background: var(--gold);
+      margin-bottom: 2.5rem;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .about-card {
+      background: rgba(10,22,40,0.7);
+      border: 1px solid rgba(201,168,76,0.15);
+      padding: 2.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .about-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
+    .about-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--ivory);
+      margin-bottom: 1rem;
+    }
+    .about-card p { font-size: 0.95rem; line-height: 1.75; color: var(--slate); }
+
+    /* ─── RULES ─── */
+    #rules { padding: 6rem 3rem; background: rgba(10,22,40,0.4); }
+    .rules-inner { max-width: 1100px; margin: 0 auto; }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .rule-card {
+      border-top: 2px solid var(--gold);
+      padding: 2rem 1.8rem;
+      background: rgba(6,16,32,0.6);
+      transition: background 0.3s;
+    }
+    .rule-card:hover { background: rgba(10,22,40,0.9); }
+    .rule-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(201,168,76,0.25);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .rule-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      margin-bottom: 0.75rem;
+    }
+    .rule-card p { font-size: 0.9rem; line-height: 1.7; color: var(--slate); }
+
+    /* ─── HELP / CONTACTS ─── */
+    #help { padding: 6rem 3rem; }
+    .help-inner { max-width: 1100px; margin: 0 auto; }
+    .help-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .rules-accordion { display: flex; flex-direction: column; gap: 0.75rem; }
+    .accordion-item {
+      border: 1px solid rgba(201,168,76,0.15);
+      overflow: hidden;
+    }
+    .accordion-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      cursor: pointer;
+      background: rgba(10,22,40,0.5);
+      transition: background 0.25s;
+    }
+    .accordion-header:hover { background: rgba(10,22,40,0.9); }
+    .accordion-header h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ivory);
+    }
+    .accordion-icon {
+      color: var(--gold);
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+    .accordion-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      background: rgba(6,16,32,0.6);
+    }
+    .accordion-item.open .accordion-body { max-height: 400px; }
+    .accordion-body p {
+      padding: 1.2rem 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--slate);
+    }
+    .accordion-body ul {
+      padding: 0 1.5rem 1.2rem 2.5rem;
+      font-size: 0.9rem;
+      line-height: 2;
+      color: var(--slate);
+    }
+
+    /* Contact card */
+    .contact-panel {
+      background: rgba(10,22,40,0.7);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 2.5rem;
+      position: sticky;
+      top: 90px;
+    }
+    .contact-panel h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      color: var(--ivory);
+      margin-bottom: 0.5rem;
+    }
+    .contact-panel p {
+      font-size: 0.9rem;
+      color: var(--slate);
+      margin-bottom: 2rem;
+      line-height: 1.65;
+    }
+    .contact-person {
+      display: flex; flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.5rem;
+      border-left: 3px solid var(--gold);
+      margin-bottom: 1.2rem;
+      background: rgba(6,16,32,0.5);
+    }
+    .contact-person .name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      color: var(--ivory);
+      text-transform: uppercase;
+    }
+    .contact-person .role {
+      font-size: 0.8rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .contact-person a {
+      color: var(--slate);
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-person a:hover { color: var(--gold); }
+    .contact-form { margin-top: 2rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      background: rgba(6,16,32,0.8);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--cream);
+      padding: 0.75rem 1rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--gold);
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-group select option { background: var(--navy); }
+    .form-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--gold);
+      color: var(--deep);
+      border: none;
+      cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.25s;
+    }
+    .form-submit:hover { background: var(--gold-light); }
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    footer p {
+      font-size: 0.8rem;
+      color: var(--slate);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      #about, #rules, #help { padding: 4rem 1.5rem; }
+      .about-grid, .rules-grid { grid-template-columns: 1fr; }
+      .help-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Model UN</div>
+  <div class="nav-links">
+    <a onclick="showPage('home')" class="active" id="nav-home">Home</a>
+    <a onclick="showPage('about')" id="nav-about">About</a>
+    <a onclick="showPage('rules')" id="nav-rules">Rules</a>
+    <a onclick="showPage('help')" id="nav-help">Help & Contact</a>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<section class="page active" id="home">
+  <div class="globe-bg"></div>
+  <div class="globe-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Presented by SAS Austin</div>
+    <h1 class="hero-title">Model <span>United</span><br>Nations</h1>
+    <p class="hero-subtitle">Diplomacy, Debate & Global Problem-Solving</p>
+    <div class="hero-divider"></div>
+    <div class="hero-names">Braun Brody &nbsp;·&nbsp; Baron Block</div>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="showPage('rules')">View Rules</button>
+      <button class="btn-outline" onclick="showPage('help')">Contact Us</button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT PAGE -->
+<section class="page" id="about">
+  <div style="padding: 6rem 3rem; max-width: 1100px; margin: 0 auto;">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">About Model UN</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:1.05rem; line-height:1.85; color:var(--text); max-width:700px;">
+      Model United Nations (MUN) is an academic simulation of the United Nations where students step into the roles of delegates, representing countries and debating pressing global issues. It sharpens critical thinking, public speaking, negotiation, and cross-cultural understanding.
+    </p>
+    <div class="about-grid">
+      <div class="about-card fade-in">
+        <h3>Our Mission</h3>
+        <p>We aim to cultivate the next generation of global leaders by providing an immersive platform for diplomatic discourse. Through rigorous debate and collaborative resolution-drafting, delegates gain skills that transcend the conference room.</p>
+      </div>
+      <div class="about-card fade-in">
+        <h3>Why Participate?</h3>
+        <p>Model UN builds essential life skills — persuasive communication, research depth, negotiation tactics, and the ability to find consensus across differing viewpoints. Whether you're a first-timer or a seasoned delegate, every conference leaves you sharper.</p>
+      </div>
+      <div class="about-card fade-in">
+        <h3>How It Works</h3>
+        <p>Delegates are assigned countries and committees. They research their nation's position on topics, write position papers, and participate in formal debate sessions — including motions, amendments, and voting procedures — to produce working resolutions.</p>
+      </div>
+      <div class="about-card fade-in">
+        <h3>Our Committees</h3>
+        <p>We host a range of committee types including General Assembly bodies, specialized agencies, and crisis committees — each with unique rules and procedures. Delegates from all experience levels will find a committee that challenges and excites them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES PAGE -->
+<section class="page" id="rules">
+  <div class="rules-inner" style="max-width:1100px; margin:0 auto; padding: 6rem 3rem;">
+    <div class="section-label">Procedure & Protocol</div>
+    <h2 class="section-title">Rules of Procedure</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:1rem; line-height:1.8; color:var(--slate); max-width:680px;">
+      Model UN follows Robert's Rules of Order adapted for UN-style debate. Understanding these procedures is essential for effective participation. Below are the core rules every delegate must know.
+    </p>
+    <div class="rules-grid">
+      <div class="rule-card fade-in">
+        <div class="rule-number">01</div>
+        <h3>Roll Call & Quorum</h3>
+        <p>Each session begins with a roll call. Delegates respond "Present" or "Present and Voting." A quorum (majority of enrolled delegates) must be established before debate can begin.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">02</div>
+        <h3>Setting the Agenda</h3>
+        <p>Delegates vote to determine which topic will be addressed first. Any delegate may motion to set the agenda; a simple majority vote decides the order of topics for debate.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">03</div>
+        <h3>Speakers List</h3>
+        <p>The formal speakers list governs general debate. Each delegate is given an equal speaking time (typically 60–90 seconds) to address the committee on the topic at hand.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">04</div>
+        <h3>Moderated Caucus</h3>
+        <p>A delegate may motion for a moderated caucus, specifying a total time and speaking time. Delegates are recognized by the Chair to speak on a specific, narrowed subtopic.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">05</div>
+        <h3>Unmoderated Caucus</h3>
+        <p>An unmoderated caucus is informal floor time used for lobbying, merging working papers, and building consensus. Delegates move freely and speak without formal recognition.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">06</div>
+        <h3>Working Papers</h3>
+        <p>Working papers are pre-resolution documents that outline proposed solutions. They require a minimum number of signatories to be introduced and do not need to be approved by the Chair before circulation.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">07</div>
+        <h3>Draft Resolutions</h3>
+        <p>A working paper that has been approved by the dais becomes a draft resolution. It is formatted with preambulatory and operative clauses and debated formally before a vote.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">08</div>
+        <h3>Amendments</h3>
+        <p>Delegates may propose friendly (agreed upon by sponsors) or unfriendly amendments to a draft resolution. Unfriendly amendments require a procedural vote by the committee.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">09</div>
+        <h3>Voting Procedure</h3>
+        <p>Voting is done by placard. Delegates who responded "Present and Voting" must vote Yes or No — abstentions are not allowed. Delegates who responded "Present" may abstain. A simple majority passes most resolutions.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">10</div>
+        <h3>Points of Order</h3>
+        <p>A Point of Order is raised when a delegate believes proper procedure is not being followed. These interrupt debate and must be ruled on by the Chair before debate continues.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">11</div>
+        <h3>Points of Information</h3>
+        <p>A Point of Information (or Parliamentary Inquiry) asks the Chair a procedural question. Delegates may also yield remaining speaking time to Points of Information from other delegates.</p>
+      </div>
+      <div class="rule-card fade-in">
+        <div class="rule-number">12</div>
+        <h3>Delegate Conduct</h3>
+        <p>All delegates must maintain decorum. Delegates speak in third-person ("The delegate of France…"), address the Chair respectfully, and refrain from personal attacks. The Chair may censure delegates for misconduct.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HELP & CONTACT PAGE -->
+<section class="page" id="help">
+  <div class="help-inner">
+    <div class="section-label">Help & Contact</div>
+    <h2 class="section-title">Need Assistance?</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:1rem; line-height:1.8; color:var(--slate); max-width:680px;">
+      Whether you have questions about rules of procedure, committee assignments, or registration — Braun and Baron are here to help. Expand a topic below or reach out directly.
+    </p>
+
+    <div class="help-grid">
+      <!-- FAQ Accordion -->
+      <div>
+        <h3 style="font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ivory); margin-bottom:1.5rem;">Frequently Asked Questions</h3>
+        <div class="rules-accordion">
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h4>What is a Position Paper?</h4>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>A position paper is a short document (typically 1–2 pages) that outlines your country's stance on the committee topic. It includes background on the issue from your country's perspective, past UN action, and proposed solutions. Position papers are usually submitted before the conference begins.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h4>How do I make a motion?</h4>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>Raise your placard and wait to be recognized by the Chair. Then clearly state your motion, for example: <em>"The delegate of Germany motions for a 10-minute moderated caucus with a 60-second speaking time to discuss climate finance mechanisms."</em> Motions require a second and a simple majority vote to pass.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h4>What are operative clause starters?</h4>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>Operative clauses begin each actionable paragraph of a resolution. Common starters include:</p>
+              <ul>
+                <li>Calls upon</li>
+                <li>Urges</li>
+                <li>Encourages</li>
+                <li>Requests</li>
+                <li>Condemns</li>
+                <li>Decides</li>
+                <li>Recommends</li>
+                <li>Affirms</li>
+              </ul>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h4>How do preambulatory clauses work?</h4>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>Preambulatory clauses come before the operative section and establish context. They are italicized and begin with words like: <em>Recalling, Reaffirming, Noting, Concerned by, Recognizing, Acknowledging,</em> and <em>Bearing in mind.</em> They do not themselves enact anything — they set the stage for the operative clauses.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h4>What happens during voting procedure?</h4>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>When voting begins, no one may enter or leave the room. Delegates vote in alphabetical order by country. You may vote Yes, No, or Abstain (if you responded "Present" during roll call). After the vote, delegates may make Explanations of Vote to clarify their position on the record.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h4>Tips for new delegates</h4>
+              <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-body">
+              <p>Research your country thoroughly — know its foreign policy, alliances, and economic situation. Engage early: get on the speakers list in the first session. During unmoderated caucuses, approach other delegates to build alliances. Be flexible — great delegates compromise to build winning coalitions, not just to win arguments.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Panel -->
+      <div>
+        <div class="contact-panel">
+          <h3>Get in Touch</h3>
+          <p>Have a question that isn't covered? Reach out to our chairs directly or use the form below.</p>
+
+          <div class="contact-person">
+            <span class="name">Braun Brody</span>
+            <span class="role">Chair</span>
+            <a href="mailto:braunbrody32@sasaustin.org">braunbrody32@sasaustin.org</a>
+          </div>
+
+          <div class="contact-person">
+            <span class="name">Baron Block</span>
+            <span class="role">Chair</span>
+            <a href="mailto:baronblock32@sasaustin.org">baronblock32@sasaustin.org</a>
+          </div>
+
+          <div class="contact-form">
+            <div id="formArea">
+              <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" id="fname" placeholder="Full name" />
+              </div>
+              <div class="form-group">
+                <label>Your Email</label>
+                <input type="email" id="femail" placeholder="your@email.com" />
+              </div>
+              <div class="form-group">
+                <label>Recipient</label>
+                <select id="frecipient">
+                  <option value="braunbrody32@sasaustin.org">Braun Brody</option>
+                  <option value="baronblock32@sasaustin.org">Baron Block</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea id="fmessage" placeholder="What can we help you with?"></textarea>
+              </div>
+              <button class="form-submit" onclick="sendMessage()">Send Message</button>
+            </div>
+            <div class="form-success" id="formSuccess">
+              ✓ Your message has been prepared.<br>
+              <small style="color:var(--slate); font-family:'Barlow',sans-serif; font-size:0.85rem;">A draft email to your selected chair has been opened.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Model United Nations</div>
+  <p>Braun Brody &nbsp;·&nbsp; Baron Block &nbsp;·&nbsp; SAS Austin</p>
+  <p style="font-size:0.78rem; color:rgba(138,154,176,0.5);">© 2025 All Rights Reserved</p>
+</footer>
+
+<script>
+  // ── Page Routing ──
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(observeFades, 100);
+  }
+
+  // ── Accordion ──
+  function toggleAccordion(header) {
+    const item = header.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── Contact Form ──
+  function sendMessage() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('femail').value.trim();
+    const recipient = document.getElementById('frecipient').value;
+    const message = document.getElementById('fmessage').value.trim();
+    if (!name || !email || !message) {
+      alert('Please fill out all fields before sending.');
+      return;
+    }
+    const subject = encodeURIComponent('MUN Inquiry from ' + name);
+    const body = encodeURIComponent(message + '\n\nFrom: ' + name + '\nReply to: ' + email);
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    document.getElementById('formArea').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // ── Scroll Fade ──
+  function observeFades() {
+    const els = document.querySelectorAll('.fade-in:not(.visible)');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    els.forEach(el => obs.observe(el));
+  }
+  observeFades();
+</script>
+</body>
+</html>
