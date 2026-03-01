@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Model UN — Braun Brody & Baron Block</title>
+  <link rel="icon" type="image/x-icon" href="happy.png">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
+    /*line 1009 has events data*/
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -429,14 +431,201 @@
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+    /* ─── CALENDAR ─── */
+    #calendar { padding: 5rem 3rem 4rem; }
+    .cal-inner { max-width: 1100px; margin: 0 auto; }
+
+    /* Calendar / Event-detail toggle */
+    .cal-view, .event-detail-view { transition: opacity 0.3s ease; }
+    .cal-view.hidden, .event-detail-view.hidden { display: none; }
+
+    /* Month nav */
+    .cal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .cal-month-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: var(--ivory);
+    }
+    .cal-nav-btns { display: flex; gap: 0.5rem; align-items: center; }
+    .cal-nav-btn {
+      background: rgba(10,22,40,0.7);
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--gold);
+      width: 38px; height: 38px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .cal-nav-btn:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+    .cal-today-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 1rem;
+      height: 38px;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--slate);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cal-today-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* Grid */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.1);
+    }
+    .cal-day-label {
+      background: rgba(6,16,32,0.9);
+      padding: 0.6rem 0;
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+    .cal-cell {
+      background: rgba(6,16,32,0.6);
+      min-height: 100px;
+      padding: 0.5rem;
+      vertical-align: top;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .cal-cell:hover { background: rgba(10,22,40,0.9); }
+    .cal-cell.other-month { opacity: 0.3; }
+    .cal-cell.today { background: rgba(201,168,76,0.06); }
+    .cal-cell.today .cal-date-num {
+      background: var(--gold);
+      color: var(--deep);
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cal-date-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--slate);
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.3rem;
+    }
+    .cal-event-chip {
+      background: rgba(201,168,76,0.15);
+      border-left: 2px solid var(--gold);
+      color: var(--cream);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.72rem;
+      padding: 0.25rem 0.45rem;
+      margin-bottom: 0.25rem;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: background 0.2s, border-color 0.2s;
+      display: block;
+    }
+    .cal-event-chip:hover {
+      background: rgba(201,168,76,0.3);
+      border-left-color: var(--gold-light);
+    }
+    .cal-event-chip.type-session  { border-left-color: #6ab0f5; background: rgba(106,176,245,0.12); }
+    .cal-event-chip.type-deadline { border-left-color: #f56a6a; background: rgba(245,106,106,0.12); }
+    .cal-event-chip.type-social   { border-left-color: #6af5b0; background: rgba(106,245,176,0.12); }
+    .cal-event-chip.type-workshop { border-left-color: #c96af5; background: rgba(201,106,245,0.12); }
+
+    /* Legend */
+    .cal-legend {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.78rem;
+      color: var(--slate);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    /* ─── EVENT DETAIL PANEL (read-only) ─── */
+    .event-detail-view { padding: 0; }
+    .event-detail-back {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--slate); cursor: pointer; margin-bottom: 2rem;
+      transition: color 0.2s; background: none; border: none;
+    }
+    .event-detail-back:hover { color: var(--gold); }
+    .event-detail-card {
+      background: rgba(10,22,40,0.7);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 3rem; max-width: 780px;
+    }
+    .event-type-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border: 1px solid; margin-bottom: 1.2rem;
+    }
+    .event-type-badge.type-session  { color: #6ab0f5; border-color: #6ab0f5; }
+    .event-type-badge.type-deadline { color: #f56a6a; border-color: #f56a6a; }
+    .event-type-badge.type-social   { color: #6af5b0; border-color: #6af5b0; }
+    .event-type-badge.type-workshop { color: #c96af5; border-color: #c96af5; }
+    .event-type-badge.type-general  { color: var(--gold); border-color: var(--gold); }
+    .ev-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 700; color: var(--ivory);
+      margin-bottom: 1.8rem; line-height: 1.2;
+    }
+    .ev-meta-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.2rem 2rem; margin-bottom: 1.8rem;
+    }
+    .ev-meta-item label {
+      display: block; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 0.3rem;
+    }
+    .ev-meta-item span { font-family: 'Barlow', sans-serif; font-size: 0.92rem; color: var(--cream); }
+    .ev-divider { border: none; border-top: 1px solid rgba(201,168,76,0.12); margin: 1.6rem 0; }
+    .ev-desc-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 0.5rem;
+    }
+    .ev-desc-text {
+      font-family: 'Barlow', sans-serif; font-size: 0.92rem;
+      color: var(--text); line-height: 1.75; white-space: pre-wrap;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
-      .nav-links { gap: 1.2rem; }
-      #about, #rules, #help { padding: 4rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+      #about, #rules, #help, #calendar { padding: 4rem 1.5rem; }
       .about-grid, .rules-grid { grid-template-columns: 1fr; }
       .help-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
+      .cal-cell { min-height: 70px; }
+      .event-detail-card { padding: 1.5rem; }
+      .event-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -449,6 +638,7 @@
     <a onclick="showPage('home')" class="active" id="nav-home">Home</a>
     <a onclick="showPage('about')" id="nav-about">About</a>
     <a onclick="showPage('rules')" id="nav-rules">Rules</a>
+    <a onclick="showPage('calendar')" id="nav-calendar">Calendar</a>
     <a onclick="showPage('help')" id="nav-help">Help & Contact</a>
   </div>
 </nav>
@@ -665,13 +855,13 @@
           <div class="contact-person">
             <span class="name">Braun Brody</span>
             <span class="role">Chair</span>
-            <a href="mailto:braunbrody32@sasaustin.org">braunbrody32@sasaustin.org</a>
+            <a href="/cdn-cgi/l/email-protection#1e7c6c7f6b707c6c717a672d2c5e6d7f6d7f6b6d6a777030716c79"><span class="__cf_email__" data-cfemail="02607063776c60706d667b313042716371637771766b6c2c6d7065">[email&#160;protected]</span></a>
           </div>
 
           <div class="contact-person">
             <span class="name">Baron Block</span>
             <span class="role">Chair</span>
-            <a href="mailto:baronblock32@sasaustin.org">baronblock32@sasaustin.org</a>
+            <a href="/cdn-cgi/l/email-protection#7f1d1e0d10111d13101c144c4d3f0c1e0c1e0a0c0b161151100d18"><span class="__cf_email__" data-cfemail="3c5e5d4e53525e50535f570f0e7c4f5d4f5d494f48555212534e5b">[email&#160;protected]</span></a>
           </div>
 
           <div class="contact-form">
@@ -708,6 +898,59 @@
   </div>
 </section>
 
+<!-- CALENDAR PAGE -->
+<section class="page" id="calendar">
+  <div class="cal-inner">
+
+    <!-- Calendar view -->
+    <div class="cal-view" id="calView">
+      <div class="section-label">Schedule & Events</div>
+      <div class="cal-header">
+        <h2 class="cal-month-title" id="calMonthTitle">—</h2>
+        <div class="cal-nav-btns">
+          <button class="cal-nav-btn" onclick="changeMonth(-1)" title="Previous month">&#8592;</button>
+          <button class="cal-today-btn" onclick="goToToday()">Today</button>
+          <button class="cal-nav-btn" onclick="changeMonth(1)" title="Next month">&#8594;</button>
+        </div>
+      </div>
+
+      <div class="cal-grid" id="calGrid">
+        <!-- Injected by JS -->
+      </div>
+
+      <div class="cal-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#6ab0f5"></div> Session</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f56a6a"></div> Deadline</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#6af5b0"></div> Social</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c96af5"></div> Workshop</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div> General</div>
+      </div>
+    </div>
+
+    <!-- Event detail (read-only) -->
+    <div class="event-detail-view hidden" id="eventDetailView">
+      <button class="event-detail-back" onclick="closeEventDetail()">&#8592; &nbsp;Back to Calendar</button>
+      <div class="event-detail-card">
+        <div id="evBadge" class="event-type-badge type-general">General</div>
+        <div class="ev-title" id="evTitle"></div>
+        <hr class="ev-divider">
+        <div class="ev-meta-grid">
+          <div class="ev-meta-item"><label>Date</label><span id="evDate">—</span></div>
+          <div class="ev-meta-item"><label>Time</label><span id="evTime">—</span></div>
+          <div class="ev-meta-item"><label>Location</label><span id="evLocation">—</span></div>
+          <div class="ev-meta-item"><label>Committee / Delegates</label><span id="evCommittee">—</span></div>
+        </div>
+        <div id="evDescWrap">
+          <hr class="ev-divider">
+          <div class="ev-desc-label">Description / Notes</div>
+          <div class="ev-desc-text" id="evDesc"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">Model United Nations</div>
@@ -740,10 +983,7 @@
     const email = document.getElementById('femail').value.trim();
     const recipient = document.getElementById('frecipient').value;
     const message = document.getElementById('fmessage').value.trim();
-    if (!name || !email || !message) {
-      alert('Please fill out all fields before sending.');
-      return;
-    }
+    if (!name || !email || !message) { alert('Please fill out all fields before sending.'); return; }
     const subject = encodeURIComponent('MUN Inquiry from ' + name);
     const body = encodeURIComponent(message + '\n\nFrom: ' + name + '\nReply to: ' + email);
     window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
@@ -760,6 +1000,160 @@
     els.forEach(el => obs.observe(el));
   }
   observeFades();
+
+  // ════════════════════════════════════════════════════════
+  //  CALENDAR EVENTS
+  //  To add/edit/remove events, update the list below.
+  //  Format: { date:'YYYY-MM-DD', title:'...', type:'general|session|deadline|social|workshop',
+  //            time:'HH:MM', location:'...', committee:'...', desc:'...' }
+  // ════════════════════════════════════════════════════════
+  const EVENTS = [
+    {
+      date: '2026-02-03',
+      title: 'Convince Peoples',
+      type: 'general',
+      time: '08:45',
+      location: 'SAS MS',
+      committee: 'All Members',
+      desc: 'We are trying to get this off the ground. We need a lot of support.'
+    },
+    // ── Add more events below this line ──
+    // {
+    //   date: '2026-03-10',
+    //   title: 'Example Session',
+    //   type: 'session',
+    //   time: '09:00',
+    //   location: 'Main Hall',
+    //   committee: 'All Delegates',
+    //   desc: 'Description here.'
+    // },
+  ];
+
+  // ── Build lookup map from EVENTS list ──
+  const calEvents = {};
+  EVENTS.forEach(ev => {
+    if (!calEvents[ev.date]) calEvents[ev.date] = [];
+    calEvents[ev.date].push(ev);
+  });
+
+  // ── Calendar state ──
+  const MONTH_NAMES = ['January','February','March','April','May','June',
+                       'July','August','September','October','November','December'];
+  const DAY_LABELS  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  let currentYear  = new Date().getFullYear();
+  let currentMonth = new Date().getMonth();
+
+  function renderCalendar() {
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+
+    DAY_LABELS.forEach(d => {
+      const lbl = document.createElement('div');
+      lbl.className = 'cal-day-label';
+      lbl.textContent = d;
+      grid.appendChild(lbl);
+    });
+
+    const today        = new Date();
+    const firstDay     = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth  = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const prevDays     = new Date(currentYear, currentMonth, 0).getDate();
+    const totalCells   = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+    for (let i = 0; i < totalCells; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+
+      let day, year = currentYear, month = currentMonth, isOther = false;
+      if (i < firstDay) {
+        day = prevDays - firstDay + i + 1; month = currentMonth - 1;
+        if (month < 0) { month = 11; year--; } isOther = true;
+      } else if (i >= firstDay + daysInMonth) {
+        day = i - firstDay - daysInMonth + 1; month = currentMonth + 1;
+        if (month > 11) { month = 0; year++; } isOther = true;
+      } else {
+        day = i - firstDay + 1;
+      }
+
+      if (isOther) cell.classList.add('other-month');
+      const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+      if (isToday) cell.classList.add('today');
+
+      const numEl = document.createElement('div');
+      numEl.className = 'cal-date-num';
+      numEl.textContent = day;
+      cell.appendChild(numEl);
+
+      const dateKey = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      (calEvents[dateKey] || []).forEach((ev, idx) => {
+        const chip = document.createElement('div');
+        chip.className = `cal-event-chip type-${ev.type || 'general'}`;
+        chip.textContent = (ev.time ? ev.time + ' ' : '') + ev.title;
+        chip.title = ev.title;
+        chip.onclick = (e) => { e.stopPropagation(); openEventDetail(dateKey, idx); };
+        cell.appendChild(chip);
+      });
+
+      grid.appendChild(cell);
+    }
+
+    document.getElementById('calMonthTitle').textContent = MONTH_NAMES[currentMonth] + ' ' + currentYear;
+  }
+
+  function changeMonth(dir) {
+    currentMonth += dir;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
+    renderCalendar();
+  }
+
+  function goToToday() {
+    currentYear = new Date().getFullYear();
+    currentMonth = new Date().getMonth();
+    renderCalendar();
+  }
+
+  // ── Read-only event detail ──
+  function openEventDetail(dateKey, idx) {
+    const ev   = calEvents[dateKey][idx];
+    const type = ev.type || 'general';
+
+    const badge = document.getElementById('evBadge');
+    badge.className = `event-type-badge type-${type}`;
+    badge.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+
+    document.getElementById('evTitle').textContent = ev.title || '—';
+
+    let dateStr = '—';
+    if (ev.date) {
+      const [y, m, d] = ev.date.split('-');
+      dateStr = `${MONTH_NAMES[parseInt(m,10)-1]} ${parseInt(d,10)}, ${y}`;
+    }
+    document.getElementById('evDate').textContent      = dateStr;
+    document.getElementById('evTime').textContent      = ev.time      || '—';
+    document.getElementById('evLocation').textContent  = ev.location  || '—';
+    document.getElementById('evCommittee').textContent = ev.committee || '—';
+
+    const descWrap = document.getElementById('evDescWrap');
+    const descEl   = document.getElementById('evDesc');
+    if (ev.desc && ev.desc.trim()) {
+      descEl.textContent   = ev.desc;
+      descWrap.style.display = '';
+    } else {
+      descWrap.style.display = 'none';
+    }
+
+    document.getElementById('calView').classList.add('hidden');
+    document.getElementById('eventDetailView').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closeEventDetail() {
+    document.getElementById('eventDetailView').classList.add('hidden');
+    document.getElementById('calView').classList.remove('hidden');
+  }
+
+  renderCalendar();
 </script>
 </body>
 </html>
