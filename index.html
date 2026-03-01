@@ -783,6 +783,84 @@
       .nav-links { gap: 1.2rem; }
     }
 
+    /* ─── GUIDES ─── */
+    #guides { padding: 6rem 3rem; }
+    .guides-inner { max-width: 1100px; margin: 0 auto; }
+    .guide-tabs { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .guide-tab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.65rem 1.6rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--slate); background: transparent;
+      cursor: pointer; transition: all 0.25s;
+    }
+    .guide-tab:hover { border-color: var(--gold); color: var(--gold); }
+    .guide-tab.active { background: var(--gold); color: var(--deep); border-color: var(--gold); font-weight: 700; }
+    .guide-panel { display: none; }
+    .guide-panel.active { display: block; }
+    .guide-intro { font-size: 1rem; line-height: 1.85; color: var(--text); max-width: 760px; margin-bottom: 3rem; }
+    .guide-step {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 0 2rem; margin-bottom: 2.5rem; padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+    }
+    .guide-step:last-of-type { border-bottom: none; }
+    .guide-step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 700;
+      color: rgba(201,168,76,0.2); line-height: 1; padding-top: 0.2rem;
+    }
+    .guide-step-content h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ivory); margin-bottom: 0.6rem;
+    }
+    .guide-step-content p { font-size: 0.93rem; line-height: 1.8; color: var(--slate); margin-bottom: 0.8rem; }
+    .guide-example {
+      background: rgba(10,22,40,0.7); border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.5rem; margin-top: 0.8rem;
+      font-size: 0.88rem; line-height: 1.8; color: var(--cream); font-style: italic;
+    }
+    .guide-example strong {
+      font-style: normal; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 0.5rem; font-weight: 600;
+    }
+    .guide-clause-list {
+      list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem;
+    }
+    .guide-clause-list li {
+      background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2);
+      font-family: 'Barlow', sans-serif; font-size: 0.82rem; font-style: italic;
+      color: var(--cream); padding: 0.3rem 0.8rem;
+    }
+    .guide-template-box {
+      background: rgba(6,16,32,0.8); border: 1px solid rgba(201,168,76,0.2);
+      padding: 2rem 2.5rem; margin-top: 2rem;
+      font-family: 'Barlow', sans-serif; font-size: 0.88rem; line-height: 2; color: var(--text);
+    }
+    .tpl-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .tpl-clause { color: var(--ivory); font-style: italic; }
+    .tpl-fill { color: rgba(201,168,76,0.6); }
+    .tpl-comment { color: var(--slate); font-size: 0.78rem; }
+    .guide-tip {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.15);
+      padding: 1.2rem 1.5rem; margin-top: 1rem;
+    }
+    .guide-tip-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .guide-tip p { font-size: 0.88rem; line-height: 1.75; color: var(--slate); margin: 0; }
+    @media (max-width: 768px) {
+      #guides { padding: 4rem 1.5rem; }
+      .guide-step { grid-template-columns: 60px 1fr; gap: 0 1rem; }
+      .guide-step-num { font-size: 2.5rem; }
+    }
+
     /* ─── RESPONSIVE (update) ─── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
@@ -808,6 +886,7 @@
     <a onclick="showPage('rules')" id="nav-rules">Rules</a>
     <a onclick="showPage('calendar')" id="nav-calendar">Calendar</a>
     <a onclick="showPage('info')" id="nav-info">Info</a>
+    <a onclick="showPage('guides')" id="nav-guides">Guides</a>
     <a onclick="showPage('help')" id="nav-help">Help & Contact</a>
   </div>
 </nav>
@@ -930,6 +1009,243 @@
         <p>All delegates must maintain decorum. Delegates speak in third-person ("The delegate of France…"), address the Chair respectfully, and refrain from personal attacks. The Chair may censure delegates for misconduct.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- GUIDES PAGE -->
+<section class="page" id="guides">
+  <div class="guides-inner">
+    <div class="section-label">Writing Guides</div>
+    <h2 class="section-title">Delegate Writing Guides</h2>
+    <div class="section-divider"></div>
+    <p class="guide-intro">
+      Two of the most important written skills in Model UN are drafting resolutions and writing position papers. Use the tabs below to navigate between our step-by-step guides for each.
+    </p>
+
+    <div class="guide-tabs">
+      <button class="guide-tab active" onclick="switchGuide('resolution', this)">How to Write a Resolution</button>
+      <button class="guide-tab" onclick="switchGuide('position', this)">How to Write a Position Paper</button>
+    </div>
+
+    <!-- RESOLUTION GUIDE -->
+    <div class="guide-panel active" id="guide-resolution">
+
+      <div class="guide-step">
+        <div class="guide-step-num">01</div>
+        <div class="guide-step-content">
+          <h3>Understand the Resolution Structure</h3>
+          <p>A Model UN resolution has three required parts: the <strong style="color:var(--ivory)">Heading</strong>, the <strong style="color:var(--ivory)">Preambulatory Clauses</strong>, and the <strong style="color:var(--ivory)">Operative Clauses</strong>. Together they identify who is speaking, why the issue matters, and what should be done about it. Think of it as: context → action.</p>
+          <div class="guide-tip">
+            <div class="guide-tip-icon">📄</div>
+            <p>Resolutions are formal UN documents. Every word carries legal and diplomatic weight — be precise, avoid vague language, and make sure each clause serves a clear purpose.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">02</div>
+        <div class="guide-step-content">
+          <h3>Write the Heading</h3>
+          <p>The heading identifies the committee, the topic, the sponsors (authors), and the signatories (delegates who support bringing it to the floor). It appears at the top of every resolution.</p>
+          <div class="guide-template-box">
+            <div class="tpl-heading">Resolution Heading Template</div>
+            <div><span class="tpl-fill">Committee Name:</span> General Assembly Third Committee</div>
+            <div><span class="tpl-fill">Topic:</span> Addressing Global Food Insecurity</div>
+            <div><span class="tpl-fill">Sponsors:</span> France, Brazil, Kenya</div>
+            <div><span class="tpl-fill">Signatories:</span> Germany, Japan, South Africa, Canada, India</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">03</div>
+        <div class="guide-step-content">
+          <h3>Draft the Preambulatory Clauses</h3>
+          <p>Preambulatory clauses set the stage — they acknowledge the problem, cite past UN action, and establish the committee's authority to act. Each clause begins with a present participle and ends with a comma. They are typically italicized.</p>
+          <p>Common preambulatory starters:</p>
+          <ul class="guide-clause-list">
+            <li>Affirming</li><li>Acknowledging</li><li>Alarmed by</li><li>Bearing in mind</li>
+            <li>Concerned</li><li>Convinced</li><li>Deeply concerned</li><li>Emphasizing</li>
+            <li>Guided by</li><li>Having considered</li><li>Noting</li><li>Reaffirming</li>
+            <li>Recognizing</li><li>Recalling</li><li>Welcoming</li>
+          </ul>
+          <div class="guide-example">
+            <strong>Example Preambulatory Clauses</strong>
+            <em>Recalling</em> United Nations General Assembly Resolution 66/288, "The Future We Want," adopted at the 2012 Rio+20 summit,<br>
+            <em>Deeply concerned</em> that approximately 828 million people face chronic hunger, disproportionately affecting sub-Saharan Africa and South Asia,<br>
+            <em>Recognizing</em> the role of climate change in exacerbating food insecurity through drought, flooding, and disrupted growing seasons,
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">04</div>
+        <div class="guide-step-content">
+          <h3>Draft the Operative Clauses</h3>
+          <p>Operative clauses are the heart of your resolution — they specify concrete actions the committee is calling for. Each begins with a bolded action verb, ends with a semicolon (except the last, which ends with a period), and may include sub-clauses indented with letters (a, b, c…).</p>
+          <p>Common operative starters:</p>
+          <ul class="guide-clause-list">
+            <li>Calls upon</li><li>Condemns</li><li>Decides</li><li>Demands</li>
+            <li>Encourages</li><li>Expresses</li><li>Further requests</li><li>Invites</li>
+            <li>Recommends</li><li>Requests</li><li>Strongly urges</li><li>Supports</li>
+            <li>Urges</li>
+          </ul>
+          <div class="guide-example">
+            <strong>Example Operative Clauses</strong>
+            <strong>1. Calls upon</strong> all member states to increase funding for the World Food Programme (WFP) by a minimum of 15% over the next fiscal year;<br><br>
+            <strong>2. Encourages</strong> developed nations to share agricultural technology with developing countries, with special attention to:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;a. Drought-resistant crop varieties adapted to local ecosystems,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;b. Precision irrigation systems affordable for smallholder farmers;<br><br>
+            <strong>3. Requests</strong> the Secretary-General to submit an annual progress report on food security indicators to the General Assembly.
+          </div>
+          <div class="guide-tip">
+            <div class="guide-tip-icon">⚠️</div>
+            <p>Avoid vague clauses like "Urges all countries to do better." Every operative clause should name a specific actor, a specific action, and — where possible — a measurable outcome or timeline.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">05</div>
+        <div class="guide-step-content">
+          <h3>Full Resolution Template</h3>
+          <p>Use this template as a scaffold when drafting your own resolution. Replace the bracketed sections with your own content.</p>
+          <div class="guide-template-box">
+            <div class="tpl-heading">Resolution Template</div>
+            <div><strong style="color:var(--ivory)">Committee:</strong> <span class="tpl-fill">[Committee Name]</span></div>
+            <div><strong style="color:var(--ivory)">Topic:</strong> <span class="tpl-fill">[Topic]</span></div>
+            <div><strong style="color:var(--ivory)">Sponsors:</strong> <span class="tpl-fill">[Country, Country, Country]</span></div>
+            <div><strong style="color:var(--ivory)">Signatories:</strong> <span class="tpl-fill">[Country, Country, Country, ...]</span></div>
+            <br>
+            <div><em class="tpl-clause">The <span class="tpl-fill">[Committee Name]</span>,</em></div>
+            <br>
+            <div class="tpl-clause"><em><span class="tpl-fill">[Preambulatory verb]</span> <span style="color:var(--text)">[reason / context],</span></em></div>
+            <div class="tpl-clause"><em><span class="tpl-fill">[Preambulatory verb]</span> <span style="color:var(--text)">[reason / context],</span></em></div>
+            <div class="tpl-clause"><em><span class="tpl-fill">[Preambulatory verb]</span> <span style="color:var(--text)">[reason / context],</span></em></div>
+            <br>
+            <div><strong style="color:var(--ivory)">1. <span class="tpl-fill">[Operative verb]</span></strong> <span style="color:var(--text)">[action + who + how];</span></div>
+            <div><strong style="color:var(--ivory)">2. <span class="tpl-fill">[Operative verb]</span></strong> <span style="color:var(--text)">[action]:</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;a. <span style="color:var(--text)">[sub-action],</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;b. <span style="color:var(--text)">[sub-action];</span></div>
+            <div><strong style="color:var(--ivory)">3. <span class="tpl-fill">[Operative verb]</span></strong> <span style="color:var(--text)">[final action].</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">06</div>
+        <div class="guide-step-content">
+          <h3>Polish & Submit</h3>
+          <p>Before submitting your draft resolution to the dais, run through this checklist:</p>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>All preambulatory clauses end with a comma; all operative clauses end with a semicolon except the last, which ends with a period.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>Each operative clause identifies a specific actor, a specific action, and ideally a measurable result or timeline.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>You have the required number of sponsors and signatories for your conference.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>No operative clause contradicts another — review for internal consistency.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>You have cited at least one previous UN resolution or treaty in the preamble to show precedent.</p></div>
+        </div>
+      </div>
+
+    </div><!-- end guide-resolution -->
+
+    <!-- POSITION PAPER GUIDE -->
+    <div class="guide-panel" id="guide-position">
+
+      <div class="guide-step">
+        <div class="guide-step-num">01</div>
+        <div class="guide-step-content">
+          <h3>What Is a Position Paper?</h3>
+          <p>A position paper is a 1–2 page document you submit before the conference. It tells the dais — and implicitly your fellow delegates — where your country stands on the committee topic. A strong position paper demonstrates thorough research and a nuanced understanding of your nation's foreign policy, and it sets you up to speak with confidence in committee.</p>
+          <div class="guide-tip">
+            <div class="guide-tip-icon">🎯</div>
+            <p>Your position paper is written from your <em>country's</em> perspective, not your personal views. Even if your assigned country holds positions you disagree with, represent them faithfully and accurately.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">02</div>
+        <div class="guide-step-content">
+          <h3>Research Your Country</h3>
+          <p>Before writing a single word, spend time researching. You need to understand your country's political system, economic situation, alliances, voting history in the UN, and any previous statements on the topic. Use the <strong style="color:var(--ivory)">Info</strong> tab on this site as a starting point, then go deeper with official government websites, UN Bibliographic databases, and reputable news sources.</p>
+          <div class="guide-tip">
+            <div class="guide-tip-icon">🔍</div>
+            <p>Search the UN Digital Library (digitallibrary.un.org) for past resolutions, speeches by your country's representatives, and official reports — these are primary sources that will strengthen your paper significantly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">03</div>
+        <div class="guide-step-content">
+          <h3>Structure Your Paper</h3>
+          <p>Most position papers follow a three-section structure. Stick to this framework unless your conference specifies otherwise.</p>
+          <div class="guide-example">
+            <strong>Section 1 — Background & the Issue</strong>
+            Describe the problem the committee is addressing. What are the key facts? Why does it matter globally? Keep this brief — 1–2 paragraphs. Your job is to frame the issue, not write an encyclopedia entry.
+          </div>
+          <div class="guide-example">
+            <strong>Section 2 — Your Country's Position</strong>
+            Explain your country's official stance. What policies does it have on this issue? What is its record in the UN? How have its geography, history, economy, or alliances shaped its perspective? This is the heart of the paper.
+          </div>
+          <div class="guide-example">
+            <strong>Section 3 — Proposed Solutions</strong>
+            Outline 2–4 concrete recommendations your country would support. These should be realistic given your country's alliances and interests. This section previews what you'll push for during committee.
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">04</div>
+        <div class="guide-step-content">
+          <h3>Position Paper Template</h3>
+          <p>Use this as a starting framework — adapt it to your conference's formatting requirements.</p>
+          <div class="guide-template-box">
+            <div class="tpl-heading">Position Paper Template</div>
+            <div><strong style="color:var(--ivory)">Country:</strong> <span class="tpl-fill">[Country Name]</span></div>
+            <div><strong style="color:var(--ivory)">Committee:</strong> <span class="tpl-fill">[Committee Name]</span></div>
+            <div><strong style="color:var(--ivory)">Topic:</strong> <span class="tpl-fill">[Topic]</span></div>
+            <div><strong style="color:var(--ivory)">Delegate:</strong> <span class="tpl-fill">[Your Name]</span></div>
+            <br>
+            <div><strong style="color:var(--ivory)">I. Background</strong></div>
+            <div style="color:var(--slate); font-size:0.82rem; padding-left:1rem;">[2–3 sentences defining the issue and its global significance. Cite statistics or prior UN action.]</div>
+            <br>
+            <div><strong style="color:var(--ivory)">II. [Country]'s Position</strong></div>
+            <div style="color:var(--slate); font-size:0.82rem; padding-left:1rem;">[Your country's stance: relevant domestic policies, past UN votes, alliances, and economic or geographic factors. 2–4 paragraphs.]</div>
+            <br>
+            <div><strong style="color:var(--ivory)">III. Proposed Solutions</strong></div>
+            <div style="color:var(--slate); font-size:0.82rem; padding-left:1rem;">[Bullet or paragraph list of 2–4 specific, realistic proposals your country supports. Each should name an actor and an action.]</div>
+            <br>
+            <div style="color:var(--slate); font-size:0.82rem;"><em>Works Cited (if required by your conference)</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">05</div>
+        <div class="guide-step-content">
+          <h3>Writing Tips for a Strong Paper</h3>
+          <div class="guide-tip"><div class="guide-tip-icon">✍️</div><p>Write in third person and formal register: "The delegation of Brazil maintains that..." not "I think Brazil should..."</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">🌍</div><p>Acknowledge tensions honestly. If your country has a complicated history with the topic (e.g., it has been criticized for environmental violations), acknowledge it briefly and explain your country's current stance. Judges respect nuance.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">📊</div><p>Quantify where possible. "GDP per capita of $1,200" is stronger than "a poor country." Specific numbers show real research.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">🔗</div><p>Connect your solutions to your country's interests. A position paper that says "the world should do X" without explaining why your country supports X is generic and weak.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">📏</div><p>Stay within the page limit. Most conferences cap position papers at one page per topic. Being concise is itself a skill — it shows you understand what matters.</p></div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="guide-step-num">06</div>
+        <div class="guide-step-content">
+          <h3>Final Checklist Before Submitting</h3>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>Paper is written from your country's perspective throughout — no personal pronouns.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>You cite at least one specific UN resolution, treaty, or official document relevant to the topic.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>Your proposed solutions are realistic for your country — consider its GDP, alliances, and political system.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>The paper is within the page limit and formatted per conference guidelines.</p></div>
+          <div class="guide-tip"><div class="guide-tip-icon">✅</div><p>You proofread for grammar, spelling, and formal tone.</p></div>
+        </div>
+      </div>
+
+    </div><!-- end guide-position -->
+
   </div>
 </section>
 
@@ -1180,6 +1496,14 @@
     document.querySelectorAll('.accordion-item.open').forEach(el => el.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
   }
+
+  // ── Guide Tabs ──
+  window.switchGuide = function(name, btn) {
+    document.querySelectorAll('.guide-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.guide-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('guide-' + name).classList.add('active');
+    btn.classList.add('active');
+  };
 
   // ── Contact Form ──
   function sendMessage() {
