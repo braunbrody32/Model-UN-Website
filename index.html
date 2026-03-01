@@ -615,7 +615,175 @@
       color: var(--text); line-height: 1.75; white-space: pre-wrap;
     }
 
-    /* ─── RESPONSIVE ─── */
+
+    /* ─── INFO PAGE ─── */
+    #info { padding: 5rem 3rem 4rem; }
+    .info-inner { max-width: 1200px; margin: 0 auto; }
+
+    .info-controls {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      align-items: center; margin-bottom: 2.5rem;
+    }
+    .info-search {
+      flex: 1; min-width: 220px;
+      background: rgba(6,16,32,0.7);
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--cream);
+      padding: 0.7rem 1.1rem;
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .info-search:focus { border-color: var(--gold); }
+    .info-search::placeholder { color: var(--slate); }
+    .info-filter-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .info-filter-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--slate); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .info-filter-btn:hover, .info-filter-btn.active {
+      border-color: var(--gold); color: var(--gold);
+      background: rgba(201,168,76,0.07);
+    }
+
+    /* Country grid */
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1rem;
+    }
+    .country-card {
+      background: rgba(10,22,40,0.65);
+      border: 1px solid rgba(201,168,76,0.13);
+      padding: 1.4rem 1.4rem 1.2rem;
+      cursor: pointer;
+      transition: border-color 0.25s, transform 0.2s, background 0.2s;
+      position: relative;
+    }
+    .country-card:hover {
+      border-color: rgba(201,168,76,0.45);
+      transform: translateY(-3px);
+      background: rgba(10,22,40,0.9);
+    }
+    .country-card.hidden { display: none; }
+    .country-flag { font-size: 2.2rem; line-height: 1; margin-bottom: 0.65rem; }
+    .country-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--ivory); margin-bottom: 0.5rem;
+    }
+    .country-quick {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.78rem; color: var(--slate); line-height: 1.6;
+    }
+    .country-quick span { color: var(--cream); }
+    .country-gov-badge {
+      display: inline-block; margin-top: 0.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+    }
+
+    /* Country detail panel */
+    .country-detail-view { display: none; }
+    .country-detail-view.open { display: block; }
+    .country-detail-back {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--slate); cursor: pointer; margin-bottom: 2rem;
+      transition: color 0.2s; background: none; border: none;
+    }
+    .country-detail-back:hover { color: var(--gold); }
+    .country-detail-card {
+      background: rgba(10,22,40,0.7);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 2.8rem;
+      max-width: 900px;
+    }
+    .cd-header { display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .cd-flag { font-size: 3.5rem; line-height: 1; }
+    .cd-header-text {}
+    .cd-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 700;
+      color: var(--ivory); line-height: 1.1; margin-bottom: 0.3rem;
+    }
+    .cd-subtitle {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem; color: var(--slate);
+    }
+
+    .cd-stats-row {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem; margin-bottom: 2rem;
+    }
+    .cd-stat {
+      background: rgba(6,16,32,0.6);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 1rem 1.2rem;
+    }
+    .cd-stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--slate); margin-bottom: 0.3rem;
+    }
+    .cd-stat-value {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem; color: var(--ivory); font-weight: 500;
+    }
+    .cd-stat-rank {
+      font-size: 0.75rem; color: var(--gold);
+    }
+
+    .cd-section { margin-bottom: 1.8rem; }
+    .cd-section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .cd-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .cd-tag {
+      font-family: 'Barlow', sans-serif; font-size: 0.8rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 2px;
+    }
+    .cd-tag.ally  { background: rgba(106,245,176,0.1); border: 1px solid rgba(106,245,176,0.3); color: #6af5b0; }
+    .cd-tag.rival { background: rgba(245,106,106,0.1); border: 1px solid rgba(245,106,106,0.3); color: #f56a6a; }
+
+    .cd-policies { display: flex; flex-direction: column; gap: 0.8rem; }
+    .cd-policy {
+      display: grid; grid-template-columns: 160px 1fr; gap: 0.8rem;
+      font-size: 0.88rem; line-height: 1.65;
+    }
+    .cd-policy-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--slate); padding-top: 0.1rem;
+    }
+    .cd-policy-text { color: var(--text); }
+
+    @media (max-width: 768px) {
+      #info { padding: 4rem 1.5rem; }
+      .country-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+      .cd-policy { grid-template-columns: 1fr; gap: 0.2rem; }
+      .country-detail-card { padding: 1.5rem; }
+      .cd-title { font-size: 1.8rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+
+    /* ─── RESPONSIVE (update) ─── */
     @media (max-width: 768px) {
       nav { padding: 0 1.5rem; }
       .nav-links { gap: 1rem; }
@@ -639,6 +807,7 @@
     <a onclick="showPage('about')" id="nav-about">About</a>
     <a onclick="showPage('rules')" id="nav-rules">Rules</a>
     <a onclick="showPage('calendar')" id="nav-calendar">Calendar</a>
+    <a onclick="showPage('info')" id="nav-info">Info</a>
     <a onclick="showPage('help')" id="nav-help">Help & Contact</a>
   </div>
 </nav>
@@ -898,6 +1067,41 @@
   </div>
 </section>
 
+<!-- INFO PAGE -->
+<section class="page" id="info">
+  <div class="info-inner">
+    <div class="section-label">Country Profiles</div>
+    <h2 class="section-title">Global Overview</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:1rem; line-height:1.8; color:var(--slate); max-width:680px; margin-bottom:2.5rem;">
+      Quick-reference profiles for all member nations — population, territory, leadership, government, alliances, and key policies. Click any country to view the full profile.
+    </p>
+
+    <!-- Controls -->
+    <div class="info-controls">
+      <input class="info-search" id="infoSearch" type="text" placeholder="Search countries…" oninput="filterCountries()" />
+      <div class="info-filter-btns">
+        <button class="info-filter-btn active" onclick="setRegion('All', this)">All</button>
+        <button class="info-filter-btn" onclick="setRegion('Americas', this)">Americas</button>
+        <button class="info-filter-btn" onclick="setRegion('Europe', this)">Europe</button>
+        <button class="info-filter-btn" onclick="setRegion('Asia', this)">Asia</button>
+        <button class="info-filter-btn" onclick="setRegion('Middle East', this)">Middle East</button>
+        <button class="info-filter-btn" onclick="setRegion('Africa', this)">Africa</button>
+        <button class="info-filter-btn" onclick="setRegion('Oceania', this)">Oceania</button>
+      </div>
+    </div>
+
+    <!-- Country card grid -->
+    <div class="country-grid" id="countryGrid"></div>
+
+    <!-- Country detail panel -->
+    <div class="country-detail-view" id="countryDetail">
+      <button class="country-detail-back" onclick="closeCountryDetail()">&#8592; &nbsp;Back to Countries</button>
+      <div class="country-detail-card" id="countryDetailCard"></div>
+    </div>
+  </div>
+</section>
+
 <!-- CALENDAR PAGE -->
 <section class="page" id="calendar">
   <div class="cal-inner">
@@ -1152,6 +1356,636 @@
     document.getElementById('eventDetailView').classList.add('hidden');
     document.getElementById('calView').classList.remove('hidden');
   }
+
+  // ════════════════════════════════════════════════════════
+  //  INFO PAGE — COUNTRY DATA
+  // ════════════════════════════════════════════════════════
+  const COUNTRIES = [
+    {
+      name: 'United States', flag: '🇺🇸', region: 'Americas',
+      population: '335,893,238', popRank: 3,
+      area: '9,833,517', areaRank: 3,
+      ruler: 'President Donald J. Trump', rulerSince: 'January 2025',
+      government: 'Federal Presidential Republic',
+      allies: ['NATO Members','Japan','South Korea','Australia','Israel','Saudi Arabia','UAE','UK','Canada'],
+      rivals: ['Russia','China','Iran','North Korea'],
+      policies: [
+        { label: 'Foreign Policy', text: 'America First doctrine; skepticism of multilateral agreements; broad tariffs on China and trading partners; pressure on NATO to increase defense spending; reduced foreign aid.' },
+        { label: 'Economy', text: 'Largest economy by nominal GDP (~$28T). Broad tariff regime enacted 2025. Tech sector dominance; Federal Reserve managing post-COVID inflation. Tax cuts and deregulation focus.' },
+        { label: 'Immigration', text: 'Sharp crackdown on illegal border crossings; mass deportation operations; end of CBP One app; heightened interior enforcement nationwide.' },
+        { label: 'Defense', text: 'Largest military budget (~$886B). NATO Article 5 commitments debated under Trump. AUKUS partnership. Indo-Pacific posture vs. China.' },
+        { label: 'Energy', text: 'Withdrawal from Paris Climate Agreement. Expansion of oil and gas drilling. Rollback of EV mandates and green subsidies. Drill, baby, drill.' },
+        { label: 'Ukraine', text: 'Reduced unconditional support vs. Biden era; pushing for ceasefire negotiations; pressuring Europe to take primary role in Ukraine defense and aid.' },
+      ]
+    },
+    {
+      name: 'China', flag: '🇨🇳', region: 'Asia',
+      population: '1,416,043,270', popRank: 2,
+      area: '9,596,960', areaRank: 4,
+      ruler: 'President Xi Jinping', rulerSince: 'March 2013',
+      government: 'One-Party Socialist State (CCP)',
+      allies: ['Russia','Pakistan','North Korea','Cambodia','Myanmar','Belarus'],
+      rivals: ['United States','India (border)','Taiwan (claimed territory)','Japan','Australia','Philippines (SCS)'],
+      policies: [
+        { label: 'Foreign Policy', text: 'Belt and Road Initiative spanning 140+ countries. "No limits" partnership with Russia. Active opposition to US-led international order; expanding influence in Africa, Latin America, and the Pacific.' },
+        { label: 'Taiwan', text: 'Claims Taiwan as sovereign territory; military exercises around the island increasing. Goal of "peaceful reunification" but force explicitly not ruled out.' },
+        { label: 'Economy', text: 'Second largest GDP (~$18T nominal). State-led capitalism; massive manufacturing and export base. Domestic consumption slowdown and property sector crisis (Evergrande). Tech self-sufficiency push amid US chip restrictions.' },
+        { label: 'Military', text: 'Rapid PLA modernization; world\'s largest navy by vessel count; hypersonic weapons development; anti-satellite capabilities. Defense budget ~$225B official.' },
+        { label: 'South China Sea', text: 'Claims ~90% of SCS via nine-dash line; constructed artificial islands with military facilities; rejected 2016 UNCLOS tribunal ruling as null and void.' },
+        { label: 'Domestic', text: 'Strict censorship (Great Firewall); suppression of Uyghurs in Xinjiang; Hong Kong autonomy dismantled via 2020 National Security Law; "common prosperity" economic ideology under Xi.' },
+      ]
+    },
+    {
+      name: 'Russia', flag: '🇷🇺', region: 'Europe',
+      population: '144,820,423', popRank: 9,
+      area: '17,098,242', areaRank: 1,
+      ruler: 'President Vladimir Putin', rulerSince: '2000 (with 2008–12 interruption)',
+      government: 'Federal Semi-Presidential Republic (Authoritarian in Practice)',
+      allies: ['Belarus','Iran','North Korea','China (strategic partner)','Syria'],
+      rivals: ['Ukraine','United States','NATO','EU','UK','Poland','Baltic States'],
+      policies: [
+        { label: 'Ukraine War', text: 'Full-scale invasion launched February 2022; occupying ~18% of Ukrainian territory including Crimea (since 2014), Donbas, Zaporizhzhia, Kherson oblasts. ICC arrest warrant issued for Putin.' },
+        { label: 'Foreign Policy', text: 'Anti-Western posture; spheres of influence doctrine over former Soviet states; weaponizing energy and grain exports; active disinformation campaigns in Western democracies.' },
+        { label: 'Economy', text: 'Heavily sanctioned since 2022; war economy with defense spending ~7% GDP. Energy exports redirected to China and India. High inflation; labor shortage due to casualties and emigration.' },
+        { label: 'Nuclear', text: 'World\'s largest nuclear arsenal (~6,000 warheads). Repeatedly uses nuclear threats as geopolitical leverage. Suspended START treaty participation 2023.' },
+        { label: 'Domestic', text: 'Political opposition eliminated (Navalny died in prison February 2024); independent media shut down; "special military operation" narrative legally enforced; mass military mobilization.' },
+        { label: 'Africa / Global South', text: 'Africa Corps (formerly Wagner Group) active in Mali, Niger, CAR, Libya, Sudan — exporting influence and security in exchange for mineral access and anti-Western positioning.' },
+      ]
+    },
+    {
+      name: 'Germany', flag: '🇩🇪', region: 'Europe',
+      population: '84,552,242', popRank: 19,
+      area: '357,114', areaRank: 63,
+      ruler: 'Chancellor Friedrich Merz (CDU)', rulerSince: 'April 2025',
+      government: 'Federal Parliamentary Republic',
+      allies: ['NATO Members','EU','USA','France','UK','Ukraine (support)'],
+      rivals: ['Russia'],
+      policies: [
+        { label: 'Foreign Policy', text: 'Atlanticist and pro-EU; strong Ukraine support; rebuilding relationship with USA under Trump; co-leading EU Russia policy with France.' },
+        { label: 'Defense', text: 'Historic Zeitenwende: committed to 2%+ GDP defense spending after decades below. Upgrading Bundeswehr; supplying Ukraine with Leopard tanks and air defense. €100B special defense fund.' },
+        { label: 'Economy', text: 'Largest EU economy (~$4.5T); export-led manufacturing. Struggling with high energy costs post-Russia decoupling, automotive industry disruption (EV transition), and investment barriers.' },
+        { label: 'Energy', text: 'Completed nuclear phase-out 2023; heavy investment in renewables and LNG imports to replace Russian gas; hydrogen economy strategy underway.' },
+        { label: 'Migration', text: 'Tightening border controls and asylum rules under Merz; pushback against irregular migration following electoral pressure from the AfD far-right party.' },
+        { label: 'EU Role', text: 'Co-leader of EU alongside France; advocate for EU enlargement (Ukraine, Western Balkans); champion of EU single market, green transition, and strategic autonomy.' },
+      ]
+    },
+    {
+      name: 'Italy', flag: '🇮🇹', region: 'Europe',
+      population: '58,870,762', popRank: 25,
+      area: '301,340', areaRank: 72,
+      ruler: 'Prime Minister Giorgia Meloni (FdI)', rulerSince: 'October 2022',
+      government: 'Parliamentary Republic',
+      allies: ['NATO Members','EU','USA (close under Trump)','Albania','Tunisia (migration deals)'],
+      rivals: ['Russia (officially)'],
+      policies: [
+        { label: 'Foreign Policy', text: 'Post-fascist right-wing government that has remained firmly within NATO and EU. Close personal rapport with Trump. Strong Ukraine support. Italy-Africa Mattei Plan for development partnerships.' },
+        { label: 'Migration', text: 'Top priority: external processing centers in Albania; financing Libyan coast guard; EU external border hardening. Criminalization of NGO rescue boats in Mediterranean.' },
+        { label: 'Economy', text: 'Third largest EU economy (~$2.3T). High public debt (140%+ of GDP). PNRR recovery funds deployment. Persistent North-South development gap.' },
+        { label: 'Energy', text: 'Pivoting to North Africa gas imports (Algeria, Libya); expanding renewables; positioning Italy as Mediterranean energy hub connecting Africa to Europe.' },
+        { label: 'EU Stance', text: 'Eurosceptic on fiscal rules but not pursuing exit. Meloni has become a relatively mainstream EU actor despite far-right origins.' },
+        { label: 'Social Policy', text: 'Pro-natalist policies; restrictions on LGBTQ+ parental recognition; strong Catholic social conservative stance; opposition to surrogacy.' },
+      ]
+    },
+    {
+      name: 'United Kingdom', flag: '🇬🇧', region: 'Europe',
+      population: '67,736,802', popRank: 21,
+      area: '242,495', areaRank: 80,
+      ruler: 'Prime Minister Keir Starmer (Labour)', rulerSince: 'July 2024',
+      government: 'Constitutional Monarchy / Parliamentary Democracy',
+      allies: ['USA (Five Eyes, AUKUS)','France','NATO','Commonwealth Nations','Australia','Canada'],
+      rivals: ['Russia'],
+      policies: [
+        { label: 'Foreign Policy', text: 'Strong Ukraine supporter; G7 leadership; seeking to "reset" EU relations post-Brexit while maintaining sovereignty red lines. Carefully managing Trump relationship.' },
+        { label: 'Brexit Legacy', text: 'Negotiating closer trade and mobility ties with EU without rejoining single market or customs union. Windsor Framework governing Northern Ireland in place.' },
+        { label: 'AUKUS', text: 'Trilateral security deal with USA and Australia: sharing nuclear-propelled submarine technology; also covering AI, quantum, and cyber warfare cooperation.' },
+        { label: 'Economy', text: 'Fifth largest economy (~$3.1T). NHS underfunding crisis. Labour raising employer taxes to fund public services. Cost of living crisis easing but housing unaffordable.' },
+        { label: 'Defense', text: 'NATO 2%+ defense spending maintained. Nuclear deterrent (Trident). Provided Storm Shadow cruise missiles and military trainers to Ukraine.' },
+        { label: 'Domestic', text: 'Inherited NHS crisis and crumbling infrastructure. Labour pushing ambitious planning reform for housebuilding. Windfall tax on North Sea energy companies.' },
+      ]
+    },
+    {
+      name: 'Japan', flag: '🇯🇵', region: 'Asia',
+      population: '124,516,301', popRank: 12,
+      area: '377,975', areaRank: 62,
+      ruler: 'Prime Minister Shigeru Ishiba (LDP)', rulerSince: 'October 2024',
+      government: 'Constitutional Monarchy / Parliamentary Democracy',
+      allies: ['USA (security treaty)','South Korea','Australia','Philippines','NATO partners','India (Quad)'],
+      rivals: ['China (islands, influence)','North Korea (nuclear / missile threat)','Russia (Kuril Islands)'],
+      policies: [
+        { label: 'Defense Shift', text: 'Historic shift: doubling defense spending to 2% GDP by 2027. Acquiring counterstrike capability (Tomahawk missiles). Pacifist constitution amendment debated. Expanding security cooperation with South Korea and Australia.' },
+        { label: 'Foreign Policy', text: 'Cornerstone of US Indo-Pacific strategy. Quad member (USA, India, Australia). Supporting Ukraine with non-lethal aid and reconstruction funding. Managing China competition while preserving trade.' },
+        { label: 'Economy', text: 'Fourth largest economy (~$4.2T). Decades of deflation ending; Bank of Japan raising rates for first time since 1990s. Hosting TSMC semiconductor fab. Aging population crisis.' },
+        { label: 'North Korea', text: 'Existential threat from DPRK missile tests over Japan. Abductee issue unresolved. Supports maximum pressure sanctions regime.' },
+        { label: 'China Relations', text: 'Largest trading partner but increasing friction: Senkaku/Diaoyu islands dispute; Taiwan Strait stability a core interest; restricting China-linked companies in sensitive sectors.' },
+        { label: 'Demographics', text: 'Severe population decline and aging society. World\'s highest proportion of elderly citizens. Cautiously opening to immigration and foreign labor to address shrinking workforce.' },
+      ]
+    },
+    {
+      name: 'India', flag: '🇮🇳', region: 'Asia',
+      population: '1,441,719,852', popRank: 1,
+      area: '3,287,263', areaRank: 7,
+      ruler: 'Prime Minister Narendra Modi (BJP)', rulerSince: 'May 2014 (3rd term from 2024)',
+      government: 'Federal Parliamentary Constitutional Republic',
+      allies: ['Russia (historical arms partner)','USA (growing)','Israel','UAE','France','Japan (Quad)','Australia (Quad)'],
+      rivals: ['Pakistan (Kashmir, cross-border terrorism)','China (border disputes, LAC)'],
+      policies: [
+        { label: 'Strategic Autonomy', text: 'India refuses binding alignment with any bloc — buys Russian arms, deepens US tech ties, leads Global South advocacy. Balancing act defines Indian foreign policy.' },
+        { label: 'Economy', text: 'Fifth largest by nominal GDP (~$3.7T); third by PPP. Fastest-growing major economy. Manufacturing PLI schemes; UPI digital payments revolution; booming tech and services exports.' },
+        { label: 'China', text: 'Border standoff since 2020 Galwan clash; disengagement partially completed. Banned Chinese apps (TikTok). Competing for influence across Indo-Pacific and Global South.' },
+        { label: 'Pakistan', text: 'Frozen relations; cross-border terrorism accusations; nuclear deterrence stability. Kashmir remains core unresolved dispute at UNSC.' },
+        { label: 'Domestic', text: 'Hindu nationalism (Hindutva) ideology of BJP. Citizenship Amendment Act controversy. Concerns about press freedom and minority rights. "One Nation, One Election" proposal.' },
+        { label: 'Climate', text: 'Net zero by 2070 pledge; 500 GW renewable capacity target by 2030. Still heavily reliant on coal. Resists pressure for faster coal phase-out at COP negotiations.' },
+      ]
+    },
+    {
+      name: 'Pakistan', flag: '🇵🇰', region: 'Asia',
+      population: '231,402,117', popRank: 5,
+      area: '881,913', areaRank: 33,
+      ruler: 'PM Shehbaz Sharif / Army (effective power)', rulerSince: 'Sharif: February 2024 (disputed elections)',
+      government: 'Federal Parliamentary Republic (Military-Influenced)',
+      allies: ['China (CPEC, weapons)','Saudi Arabia (financial)','Turkey','Gulf States'],
+      rivals: ['India (Kashmir, terrorism accusations)','Afghanistan (TTP cross-border)','USA (strained relations)'],
+      policies: [
+        { label: 'Military Dominance', text: 'Army controls foreign policy, security, and significant economic interests. IMF-supported civilian governments operate under military shadow. Army Chief often more powerful than PM.' },
+        { label: 'CPEC', text: 'China-Pakistan Economic Corridor: ~$62B Chinese investment in infrastructure and energy. Pakistan\'s largest foreign investment program; gives China access to Gwadar deep-sea port on Arabian Sea.' },
+        { label: 'Nuclear', text: 'Estimated 170 warheads; developing second-strike capability. Tactical nuclear weapons doctrine as asymmetric deterrent against Indian conventional military superiority.' },
+        { label: 'Economy', text: 'Chronic fiscal crisis; multiple IMF bailouts. High inflation, low foreign exchange reserves. Structural reforms repeatedly delayed by political instability. Diaspora remittances largest FX source.' },
+        { label: 'Afghanistan / TTP', text: 'Tehrik-i-Taliban Pakistan conducting cross-border attacks from Afghan soil; relations with Taliban Kabul government severely strained despite ideological proximity.' },
+        { label: 'Political', text: 'Former PM Imran Khan imprisoned since 2023; mass support for his PTI party but barred from politics. 2024 elections widely considered rigged. Crackdowns on protesters.' },
+      ]
+    },
+    {
+      name: 'Mexico', flag: '🇲🇽', region: 'Americas',
+      population: '130,861,007', popRank: 10,
+      area: '1,964,375', areaRank: 13,
+      ruler: 'President Claudia Sheinbaum (Morena)', rulerSince: 'October 2024',
+      government: 'Federal Presidential Constitutional Republic',
+      allies: ['USA & Canada (USMCA)','Latin America','Caribbean Community'],
+      rivals: ['USA (tariff and migration tensions)','Drug cartels (internal)'],
+      policies: [
+        { label: 'USA Relations', text: '80%+ of exports go to USA. Trump\'s 25% tariff threats and migration pressure dominate the relationship. Mexico cooperating on migration management to forestall tariffs.' },
+        { label: 'Security', text: 'Sheinbaum continues "hugs not bullets" approach toward cartels with adjustments. US DEA access restricted. Cartels control significant territory across several states.' },
+        { label: 'Economy', text: 'Second largest Latin American economy (~$1.4T). Nearshoring boom as US companies move supply chains from China to Mexico. Manufacturing FDI surging into auto, electronics, aerospace.' },
+        { label: 'Energy', text: 'State company PEMEX and CFE electricity utility reinforced over private investment under Morena policy. Oil production declining; LNG export ambitions.' },
+        { label: 'Migration', text: 'Major transit country for Central and South American migrants heading to USA. Under US pressure: National Guard deployed at southern border; coordination with Guatemala.' },
+        { label: 'Justice Reform', text: 'Controversial 2024 judicial reform: judges now elected by popular vote rather than appointed — raises significant rule-of-law concerns from USA, Canada, and legal institutions.' },
+      ]
+    },
+    {
+      name: 'Brazil', flag: '🇧🇷', region: 'Americas',
+      population: '216,422,446', popRank: 7,
+      area: '8,515,767', areaRank: 5,
+      ruler: 'President Luiz Inácio Lula da Silva (PT)', rulerSince: 'January 2023',
+      government: 'Federal Presidential Constitutional Republic',
+      allies: ['MERCOSUR','BRICS','African Union (engagement)','China (trade)'],
+      rivals: ['None major external; internally polarized vs. Bolsonaro right'],
+      policies: [
+        { label: 'Amazon / Climate', text: 'Reversed Bolsonaro\'s deforestation spike: down 50%+ since 2023. Hosted COP30 in Belém 2025. Seeks global leadership role on tropical forests and climate financing.' },
+        { label: 'BRICS', text: 'Founding BRICS member. Advocates for multipolar world order, de-dollarization of trade, and reform of global institutions like IMF and World Bank.' },
+        { label: 'Economy', text: 'Largest Latin American economy (~$2.2T). Commodity powerhouse (soy, iron ore, oil). Petrobras oil expansion at odds with climate messaging. High inequality (Gini coefficient). Fiscal deficit concerns.' },
+        { label: 'Social Policy', text: 'Expanded Bolsa Família welfare program; food security programs. Pro-labor union policies. Indigenous land demarcation resumed after Bolsonaro freeze.' },
+        { label: 'Democracy', text: 'Bolsonaro charged with coup attempt after January 8, 2023 Capitol-style riots. Lula protecting democratic institutions; Supreme Court active in accountability.' },
+        { label: 'Trade', text: 'EU-MERCOSUR trade deal nearing ratification after 25 years of negotiations. China is Brazil\'s largest trading partner. Diversifying from US economic dependence.' },
+      ]
+    },
+    {
+      name: 'Egypt', flag: '🇪🇬', region: 'Africa',
+      population: '107,770,524', popRank: 14,
+      area: '1,010,408', areaRank: 30,
+      ruler: 'President Abdel Fattah el-Sisi', rulerSince: 'June 2014',
+      government: 'Presidential Republic (Authoritarian in Practice)',
+      allies: ['USA (security partner)','Saudi Arabia','UAE','Jordan','Greece (energy, anti-Turkey axis)'],
+      rivals: ['Ethiopia (GERD Nile dispute)','Turkey (Libya, Muslim Brotherhood support)'],
+      policies: [
+        { label: 'Nile Rights', text: 'Existential issue: Ethiopia\'s Grand Ethiopian Renaissance Dam threatens Egypt\'s water security. Egypt rejects any reduction in Nile flow; has threatened military action. Negotiations repeatedly stalled.' },
+        { label: 'Gaza / Palestine', text: 'Controls Rafah crossing into Gaza; key mediator in Israel-Hamas ceasefire talks. Firmly opposes Palestinian displacement into Sinai. Managing massive diplomatic pressure from all sides.' },
+        { label: 'Economy', text: 'Severe economic crisis: pound devaluation, inflation exceeding 30%, heavy foreign debt burden. IMF program ongoing. Suez Canal revenues (~10% of GDP) impacted by Houthi Red Sea attacks.' },
+        { label: 'Security', text: 'Counter-terrorism in Sinai against ISIS affiliate. Crackdown on Muslim Brotherhood (designated terrorist). Strong intelligence (mukhabarat) state apparatus.' },
+        { label: 'Domestic', text: 'Political opposition suppressed; journalists and activists imprisoned. Sisi reelected with 89% in 2024 election widely dismissed as uncompetitive by international observers.' },
+        { label: 'Libya', text: 'Supports Haftar-aligned eastern Libya forces against Turkey-backed Tripoli government. Egyptian military presence near the Libya border.' },
+      ]
+    },
+    {
+      name: 'Nigeria', flag: '🇳🇬', region: 'Africa',
+      population: '223,804,632', popRank: 6,
+      area: '923,768', areaRank: 32,
+      ruler: 'President Bola Tinubu (APC)', rulerSince: 'May 2023',
+      government: 'Federal Presidential Constitutional Republic',
+      allies: ['ECOWAS','African Union','USA','UK','France'],
+      rivals: ['Boko Haram / ISWAP (internal)','ECOWAS friction over Sahel coups'],
+      policies: [
+        { label: 'Economy', text: 'Largest African GDP (~$370B but declining in dollar terms). Oil-dependent; production declining below OPEC quota. Tinubu removed $10B/year fuel subsidy causing severe inflation spike for ordinary Nigerians.' },
+        { label: 'Currency', text: 'Naira floated and drastically devalued 2023; inflation exceeded 30%. IMF-backed orthodox reforms. Central bank tightening. Accelerating "japa" brain drain wave abroad.' },
+        { label: 'Security', text: 'Multi-front crisis: Boko Haram/ISWAP in Northeast; banditry and kidnapping in Northwest; separatist IPOB tension in Southeast; Plateau State ethnic violence.' },
+        { label: 'ECOWAS', text: 'Nigeria leads ECOWAS response to Sahel military coups (Mali, Burkina Faso, Niger). Threatened military intervention in Niger after 2023 coup; backed down under domestic and regional pressure.' },
+        { label: 'Oil Reform', text: 'Petroleum Industry Act reforming NNPCL; attracting foreign investment. Pipeline vandalism and crude oil theft remain massive production drags worth billions per year.' },
+        { label: 'Governance', text: 'Federal system with 36 states; significant corruption at all levels. Election violence common. Tinubu\'s 2023 victory challenged at Supreme Court and upheld.' },
+      ]
+    },
+    {
+      name: 'South Africa', flag: '🇿🇦', region: 'Africa',
+      population: '60,414,495', popRank: 24,
+      area: '1,221,037', areaRank: 25,
+      ruler: 'President Cyril Ramaphosa (ANC)', rulerSince: 'February 2018',
+      government: 'Parliamentary Republic (Coalition since 2024)',
+      allies: ['BRICS','African Union','Southern African Development Community (SADC)'],
+      rivals: ['USA tensions (Gaza ICJ case)'],
+      policies: [
+        { label: 'GNU Coalition', text: 'ANC lost parliamentary majority in 2024 for the first time since 1994; formed Government of National Unity (GNU) with DA, IFP, and others. Historic power-sharing after 30 years of ANC dominance.' },
+        { label: 'BRICS / Global South', text: 'Hosted BRICS 2023 expansion summit; brought in 6 new members. Pursued ICJ genocide case against Israel — widely popular domestically. Non-aligned "African solutions" foreign policy.' },
+        { label: 'Economy', text: 'Most industrialized African economy (~$380B). Severe unemployment (32%+), crumbling infrastructure, and high crime undermine growth. High inequality — one of world\'s highest Gini coefficients.' },
+        { label: 'Energy Crisis', text: 'State power utility Eskom facing debt crisis and aging coal fleet. Rolling 12-hour blackouts (load shedding) devastating economy and daily life since 2007. Private IPPs and renewables now reducing outages.' },
+        { label: 'Land Reform', text: 'Constitutional amendment allowing expropriation without compensation hotly contested. EFF pushes radical redistribution; DA opposes; ANC seeks middle path. Threatens agricultural investment.' },
+        { label: 'Crime', text: 'One of world\'s highest murder rates (~70 per day). Organized crime; gang control in townships; illegal mining (zama zamas). Police capacity and corruption remain severe challenges.' },
+      ]
+    },
+    {
+      name: 'Vietnam', flag: '🇻🇳', region: 'Asia',
+      population: '98,858,950', popRank: 15,
+      area: '331,212', areaRank: 65,
+      ruler: 'General Secretary Tô Lâm (CPV)', rulerSince: 'August 2024',
+      government: 'One-Party Socialist State (Communist Party of Vietnam)',
+      allies: ['Russia (historical)','Laos','Cuba','ASEAN','USA (comprehensive strategic partner)'],
+      rivals: ['China (South China Sea — Spratly and Paracel Islands)'],
+      policies: [
+        { label: 'Bamboo Diplomacy', text: 'Vietnam\'s "bamboo" foreign policy: flexible and rooted — balancing USA, China, Russia without formal alignment with any bloc. Upgraded ties with all major powers simultaneously in 2023–24.' },
+        { label: 'Economy', text: 'Export powerhouse; electronics and garments manufacturing boom. Samsung produces 50%+ of its phones in Vietnam. GDP growth 6–7%/year. Rising middle class. China+1 manufacturing destination.' },
+        { label: 'South China Sea', text: 'Disputes with China over Spratly and Paracel Islands; regular confrontations with Chinese coast guard vessels. Vietnam maintains positions and has reclaimed some features.' },
+        { label: 'USA Relations', text: 'Former enemies normalized 1995; upgraded to Comprehensive Strategic Partnership in 2023 (Biden visit). Semiconductor investment and defense cooperation growing despite one-party government.' },
+        { label: 'Political', text: 'One-party CPV rule; no political opposition tolerated. Anti-corruption "Blazing Furnace" drive has imprisoned multiple senior officials, state presidents, and business oligarchs.' },
+        { label: 'Trade', text: 'WTO member; CPTPP and EVFTA (EU deal) member. Major beneficiary of US-China trade war as companies implement China+1 strategy and relocate production.' },
+      ]
+    },
+    {
+      name: 'Indonesia', flag: '🇮🇩', region: 'Asia',
+      population: '277,534,122', popRank: 4,
+      area: '1,904,569', areaRank: 14,
+      ruler: 'President Prabowo Subianto', rulerSince: 'October 2024',
+      government: 'Presidential Republic',
+      allies: ['ASEAN','USA (partner)','Australia','Japan','China (trade)'],
+      rivals: ['China (North Natuna Sea EEZ overlap — disputed)'],
+      policies: [
+        { label: 'Foreign Policy', text: 'Non-alignment ("free and active" policy); Indonesia avoids taking sides in US-China rivalry. Active ASEAN role. G20 member. Strong Gaza ceasefire advocate at UN.' },
+        { label: 'Economy', text: 'Largest Southeast Asian economy (~$1.4T). Commodities powerhouse: coal, nickel, palm oil. Downstreaming policy: banning raw nickel export to develop domestic EV battery industry and supply chain.' },
+        { label: 'New Capital', text: 'Moving capital from sinking, overpopulated Jakarta to new city Nusantara in Borneo — one of world\'s most ambitious infrastructure projects. Funding gaps and timeline slippage persist.' },
+        { label: 'Defense', text: 'Modernizing military; purchased Rafale jets from France and F-15EX from USA. Wary of South China Sea escalation. Prabowo, former Kopassus special forces general, emphasizing defense capacity.' },
+        { label: 'Religion', text: 'World\'s largest Muslim-majority country. Islam plays major role in politics. Rising conservative Islamism vs. moderate Nahdlatul Ulama tradition. Blasphemy laws enforced.' },
+        { label: 'Papua', text: 'West Papua: ongoing low-level insurgency by OPM separatists. Human rights concerns; media access restricted by government. Armed separatists killed hostage pilot 2023.' },
+      ]
+    },
+    {
+      name: 'Australia', flag: '🇦🇺', region: 'Oceania',
+      population: '26,439,111', popRank: 55,
+      area: '7,692,024', areaRank: 6,
+      ruler: 'Prime Minister Anthony Albanese (Labor)', rulerSince: 'May 2022',
+      government: 'Federal Parliamentary Constitutional Monarchy',
+      allies: ['USA (AUKUS, Five Eyes)','UK (AUKUS)','Japan','South Korea','New Zealand','NATO (partner)'],
+      rivals: ['China (managing tensions after 2020–23 coercion period)'],
+      policies: [
+        { label: 'AUKUS', text: 'Landmark 2021 trilateral security pact: USA and UK helping Australia acquire nuclear-powered submarines (SSN-AUKUS) by mid-2030s. Also covers AI, quantum, and cyber cooperation.' },
+        { label: 'China Relations', text: 'After years of Chinese trade coercion (bans on wine, barley, coal), relations stabilized 2023–24; most restrictions lifted. Strategic competition managed while preserving $300B+ trading relationship.' },
+        { label: 'Climate', text: 'Net zero by 2050; 82% renewables by 2030 target. Massive renewable energy investment boom. Phasing out coal power stations. Climate politics have stabilized after removing 6 PMs in 6 years.' },
+        { label: 'Economy', text: 'Strong commodity economy (iron ore, LNG, coal). Cost of living crisis: housing prices among world\'s highest. Immigration at record highs helping labor supply but straining housing.' },
+        { label: 'Pacific Strategy', text: '"Pacific step-up" — competing with China for influence across Pacific Island nations. Climate assistance, infrastructure investment, security cooperation with Tuvalu, PNG, and Fiji.' },
+        { label: 'Indigenous', text: 'Voice to Parliament referendum failed October 2023. Ongoing reconciliation work. Closing the Gap targets for Indigenous health, education, and incarceration make slow progress.' },
+      ]
+    },
+    {
+      name: 'France', flag: '🇫🇷', region: 'Europe',
+      population: '68,374,591', popRank: 20,
+      area: '551,695', areaRank: 42,
+      ruler: 'President Emmanuel Macron / PM François Bayrou', rulerSince: 'Macron: May 2017; Bayrou: December 2024',
+      government: 'Semi-Presidential Republic (Fifth Republic)',
+      allies: ['NATO','EU (co-leader)','UK','Germany','Ukraine (support)','Francophone Africa (fraying)'],
+      rivals: ['Russia','Sahel junta governments (Mali, Burkina Faso, Niger)'],
+      policies: [
+        { label: 'EU Strategic Autonomy', text: 'Macron\'s defining vision: Europe must be capable of defending itself independently of USA. Boosted EU defense industrial policy; pushing European sovereignty especially amid Trump uncertainty.' },
+        { label: 'Nuclear Deterrence', text: 'Only EU nuclear power. Opened debate on extending nuclear umbrella to EU partners to compensate for potential US withdrawal. Force de frappe modernization ongoing.' },
+        { label: 'Ukraine', text: 'Among Ukraine\'s strongest European backers; considering European training presence on Ukrainian soil; Mirage jets transferred; Caesar howitzers delivered; pushing escalation boundaries.' },
+        { label: 'Africa Retreat', text: 'France expelled from Mali, Burkina Faso, and Niger (all coups 2021–23). End of Operation Barkhane counterterrorism mission. Reorienting Africa policy away from post-colonial "Françafrique" framework.' },
+        { label: 'Domestic Politics', text: 'Macron lost parliamentary majority in 2024 snap election; governing with no stable majority. RN (Le Pen) is largest party but excluded from government. Deep political instability.' },
+        { label: 'Economy', text: 'Second largest EU economy (~$3.0T). Industrial policy relaunch (batteries, semiconductors). Pension age raised to 64 amid mass strikes. Fiscal deficit exceeding EU limits.' },
+      ]
+    },
+    {
+      name: 'Sweden', flag: '🇸🇪', region: 'Europe',
+      population: '10,612,086', popRank: 91,
+      area: '450,295', areaRank: 55,
+      ruler: 'Prime Minister Ulf Kristersson (Moderate Party)', rulerSince: 'October 2022',
+      government: 'Constitutional Monarchy / Parliamentary Democracy',
+      allies: ['NATO (joined March 2024)','EU','Nordic Council','USA','UK'],
+      rivals: ['Russia'],
+      policies: [
+        { label: 'NATO Accession', text: 'Ended 200 years of military non-alignment by joining NATO in March 2024 following Russia\'s Ukraine invasion. Contributes JAS Gripen fighters, Gotland Island\'s strategic position, and high-quality armed forces.' },
+        { label: 'Ukraine Support', text: 'One of largest per-capita Ukraine supporters. Donated Archer howitzers, Gripen jets pledged, substantial financial aid. Co-leads the air capability coalition for Ukraine.' },
+        { label: 'Immigration', text: 'Sharp policy reversal: after decades of liberal policy Sweden now has EU\'s most restrictive immigration rules. Gang crime wave (grenade attacks, shootings) drove major political shift.' },
+        { label: 'Economy', text: 'Small but highly developed (~$600B). Export-driven: auto (Volvo), defense (Saab Gripen), pharma, and tech. Inflation stabilizing; housing market downturn being absorbed.' },
+        { label: 'Welfare State', text: 'Universal healthcare, free university education, generous parental leave — one of world\'s most comprehensive welfare states maintained despite fiscal pressures.' },
+        { label: 'Gang Crime', text: 'Unprecedented gang violence: bombings, shootings in major cities fueled by drug trade and criminal networks. Has driven immigration policy reversal and become top domestic political issue.' },
+      ]
+    },
+    {
+      name: 'Poland', flag: '🇵🇱', region: 'Europe',
+      population: '40,850,174', popRank: 38,
+      area: '312,696', areaRank: 69,
+      ruler: 'PM Donald Tusk / President Andrzej Duda', rulerSince: 'Tusk: December 2023; Duda: term ends May 2025',
+      government: 'Parliamentary Republic',
+      allies: ['NATO (eastern flank leader)','USA (large US military presence)','UK','Baltic States','Ukraine'],
+      rivals: ['Russia','Belarus'],
+      policies: [
+        { label: 'Defense', text: 'Spending 4%+ GDP on defense — highest in NATO. Purchasing F-35s, Abrams tanks, HIMARS, South Korean K2 tanks and K9 howitzers. Positioning as key eastern NATO defensive bastion.' },
+        { label: 'Ukraine', text: 'Strongest supporter: massive weapons transfers, hosting millions of Ukrainian refugees, pushing for maximum EU and NATO support. Shares 500km direct border with Ukraine.' },
+        { label: 'Rule of Law', text: 'Tusk reversing PiS-era judicial reforms that triggered EU sanctions and funding freezes. Restoring independence of courts and public media. Conflict with Duda who vetoes legislation.' },
+        { label: 'Belarus Border', text: 'Hybrid warfare: Lukashenko regime channels migrants (from Middle East, Africa) across Belarus-Poland border as pressure tool. Poland reinforced with barrier and military deployment.' },
+        { label: 'Economy', text: 'Among fastest-growing large EU economies last decade. Major manufacturing hub and nearshoring destination. EU structural funds critical for infrastructure. Inflation now taming.' },
+        { label: 'Migration', text: 'Tusk maintaining tough border policy against Belarus hybrid attacks despite EU liberal credentials — domestic politics require it. Balancing EU asylum law compliance with border security.' },
+      ]
+    },
+    {
+      name: 'Spain', flag: '🇪🇸', region: 'Europe',
+      population: '47,519,628', popRank: 30,
+      area: '505,990', areaRank: 51,
+      ruler: 'Prime Minister Pedro Sánchez (PSOE)', rulerSince: 'June 2018',
+      government: 'Parliamentary Constitutional Monarchy',
+      allies: ['NATO','EU','Latin America (historical ties)','Morocco (migration)'],
+      rivals: ['Russia'],
+      policies: [
+        { label: 'Catalonia', text: 'Granted amnesty to Catalan independence leaders including Puigdemont in 2024 deal securing Sánchez\'s governing majority. Highly controversial across Spain\'s political spectrum.' },
+        { label: 'Progressive Social', text: 'Euthanasia legalized 2021; trans rights law 2023; expanded abortion access; strong LGBTQ+ protections. Among most progressive social legislation in Europe.' },
+        { label: 'Economy', text: 'Fourth largest EU economy (~$1.6T). Europe\'s largest tourism sector. Youth unemployment historically high but improving. Ambitious public housing investment program.' },
+        { label: 'Ukraine', text: 'Full support: Leopard tanks, Patriot air defense, and humanitarian aid provided. Sánchez active in EU response coordination.' },
+        { label: 'Immigration', text: 'Facing large arrivals via Canary Islands (West Africa route). Seeking EU external border reinforcement and burden sharing from reluctant northern members.' },
+        { label: 'Energy', text: 'European renewables leader: 50%+ electricity from wind and solar. Pursuing energy hub status for North African gas connecting to Europe. Hydrogen economy investment.' },
+      ]
+    },
+    {
+      name: 'Colombia', flag: '🇨🇴', region: 'Americas',
+      population: '52,215,503', popRank: 28,
+      area: '1,141,748', areaRank: 26,
+      ruler: 'President Gustavo Petro (Pacto Histórico)', rulerSince: 'August 2022',
+      government: 'Presidential Republic',
+      allies: ['USA (historical partner)','EU','Latin American progressive bloc'],
+      rivals: ['ELN guerrillas (internal)','Drug trafficking organizations'],
+      policies: [
+        { label: 'Total Peace', text: 'Paz Total policy: simultaneous peace negotiations with ELN guerrillas, dissident FARC groups, and urban gangs. Multiple ceasefires; progress uneven; ELN talks collapsed and restarted multiple times.' },
+        { label: 'Drug Policy', text: 'Petro seeks to end "war on drugs" framing; advocates demand-side reduction, crop substitution, and decriminalization approach. Tensions with USA over coca eradication metrics.' },
+        { label: 'USA Relations', text: 'Historically close (Plan Colombia). Strained under Petro: suspended extraditions briefly, accused USA of imperialism. Pragmatic cooperation continues on migration and counter-narcotics.' },
+        { label: 'Economy', text: 'Third largest South American economy (~$363B). Oil and mining dependent. Petro wants to stop new oil exploration — major economic policy controversy. Persistent socioeconomic inequality.' },
+        { label: 'Climate', text: 'Amazon protection advocacy; Colombian Amazon deforestation reduced. Petro advocates "no new oil" globally; speaks at every COP on climate justice and reparations.' },
+        { label: 'Venezuela', text: 'Restored diplomatic relations after Duque-era freeze. Colombia hosts 2.5M+ Venezuelan refugees — largest displacement in Latin America. Complex engagement with Maduro government.' },
+      ]
+    },
+    {
+      name: 'Argentina', flag: '🇦🇷', region: 'Americas',
+      population: '46,621,847', popRank: 32,
+      area: '2,780,400', areaRank: 8,
+      ruler: 'President Javier Milei (La Libertad Avanza)', rulerSince: 'December 2023',
+      government: 'Federal Presidential Constitutional Republic',
+      allies: ['USA (strongly aligned)','Israel','EU (trade)'],
+      rivals: ['China (initially hostile, now pragmatically engaging)','Venezuela, Cuba (ideologically)'],
+      policies: [
+        { label: 'Libertarian Economics', text: '"Chainsaw" austerity: eliminated half of government ministries; slashed public spending; achieved primary budget surplus for first time in decades. Shock therapy praised by IMF.' },
+        { label: 'Currency', text: 'Full dollarization originally planned; not fully implemented. Peso devalued 50% on day one; parallel exchange rate gap eliminated; inflation coming down from 200%+ peak.' },
+        { label: 'IMF', text: 'Renegotiating $44B IMF debt. New program agreed 2025; significant structural reforms required. Argentina\'s track record of 9 sovereign defaults haunts negotiations.' },
+        { label: 'Foreign Policy', text: 'Refused to join BRICS. Aligned firmly with USA and Israel. Withdrew from G77 climate statements. Called China a "communist assassin" while maintaining pragmatic trade.' },
+        { label: 'Deregulation', text: 'Mega Decree dismantling thousands of regulations; privatization of state companies; eliminating rent controls; deregulating labor market. Highly contested across political spectrum.' },
+        { label: 'Social Impact', text: 'Massive cuts to public universities, science (CONICET), and culture. Mass protests. Short-term poverty metrics worsening. Milei argues long-term payoff from fiscal adjustment.' },
+      ]
+    },
+    {
+      name: 'Canada', flag: '🇨🇦', region: 'Americas',
+      population: '38,781,291', popRank: 39,
+      area: '9,984,670', areaRank: 2,
+      ruler: 'Prime Minister Mark Carney (Liberal)', rulerSince: 'March 2025',
+      government: 'Federal Parliamentary Constitutional Monarchy',
+      allies: ['USA (Five Eyes, NORAD, USMCA)','UK','NATO','Australia','CPTPP partners'],
+      rivals: ['Russia'],
+      policies: [
+        { label: 'USA Tensions', text: 'Trump\'s 25% tariff threats and "51st state" rhetoric strained relations severely. Canada retaliating with counter-tariffs. Carney elected partly on standing up to Trump; sovereignty a key election issue.' },
+        { label: 'Trade', text: 'USMCA / CUSMA under review in 2026. Canada deeply integrated with US economy (75% of exports to USA). Trade war costs extremely severe for Canadian manufacturers and farmers.' },
+        { label: 'Housing Crisis', text: 'Worst housing affordability crisis in history. 500K+ annual immigration combined with undersupply drove prices to extreme levels. Now reducing immigration targets significantly.' },
+        { label: 'Immigration', text: 'After years of high targets, political backlash led to cuts in permanent resident targets and international student caps. Temporary foreign workers also under review.' },
+        { label: 'Defense', text: 'Chronic NATO underspender; under severe pressure to reach 2% GDP. Arctic sovereignty increasingly concerns as Russian and Chinese activity grows. NORAD modernization underway.' },
+        { label: 'Climate', text: 'Carbon tax: Carney pausing consumer carbon levy while maintaining industrial carbon pricing. Clean electricity grid by 2035 target. Oil sands expansion vs. climate goals tension persists.' },
+      ]
+    },
+    {
+      name: 'DR Congo', flag: '🇨🇩', region: 'Africa',
+      population: '102,262,808', popRank: 16,
+      area: '2,344,858', areaRank: 11,
+      ruler: 'President Félix Tshisekedi', rulerSince: 'January 2019',
+      government: 'Semi-Presidential Republic',
+      allies: ['African Union','SADC (military intervention 2023)','USA','Angola (mediator)'],
+      rivals: ['Rwanda (supports M23 rebels)','Uganda (historical)','100+ armed groups including ADF, FDLR, M23'],
+      policies: [
+        { label: 'M23 / Rwanda Conflict', text: 'Eastern DRC effectively at war: M23 rebels backed by Rwanda seized Goma in January 2025. Rwanda denies involvement despite UN Panel of Experts evidence. SADC mission outmatched.' },
+        { label: 'Humanitarian Crisis', text: 'Largest displacement crisis in Africa (7M+ IDPs). Globally one of the deadliest conflicts by death toll. Cholera, malnutrition, and sexual violence endemic in eastern provinces.' },
+        { label: 'Minerals', text: 'World\'s largest cobalt reserves (70%+ of global supply); massive coltan, gold, and cassiterite deposits. "Resource curse" — mineral wealth fueling conflict rather than development.' },
+        { label: 'Congo Basin', text: 'Second largest rainforest on Earth after Amazon. Global climate regulator. Increasing illegal logging and artisanal mining threatening this critical carbon sink.' },
+        { label: 'Governance', text: 'Extreme corruption and weak state capacity. Government barely controls eastern provinces. Military capacity very limited. 2023 elections results widely contested.' },
+        { label: 'MONUSCO', text: 'UN peacekeeping mission (MONUSCO) withdrawing after 25 years following mass anti-UN protests. Leaving a major security vacuum in already unstable eastern DRC.' },
+      ]
+    },
+    {
+      name: 'Iran', flag: '🇮🇷', region: 'Middle East',
+      population: '87,923,432', popRank: 17,
+      area: '1,648,195', areaRank: 17,
+      ruler: 'Supreme Leader Khamenei / President Pezeshkian', rulerSince: 'Khamenei: 1989; Pezeshkian: July 2024',
+      government: 'Islamic Theocratic Republic',
+      allies: ['Russia','China','Hezbollah (Lebanon)','Hamas (Gaza)','Houthis (Yemen)','Iraqi Shia militias'],
+      rivals: ['USA','Israel','Saudi Arabia','UAE','Bahrain'],
+      policies: [
+        { label: 'Nuclear Program', text: 'Enriching uranium to 60% (weapons-grade is 90%); IAEA inspectors restricted. Estimated weeks to breakout capacity. Iran insists program is peaceful. 2025 nuclear deal negotiations ongoing.' },
+        { label: 'Axis of Resistance', text: 'Iran\'s proxy network: Hezbollah, Hamas, Houthis, Iraqi Shia militias, Syrian government allies. Network severely degraded by Israel\'s 2024 operations but being rebuilt.' },
+        { label: 'Israel Confrontation', text: 'April 2024: first direct missile and drone attack on Israel (retaliation for Damascus consulate strike). October 2024: second barrage. Risk of direct war remains elevated.' },
+        { label: 'Economy', text: 'Severely sanctioned economy; oil exports continue via smuggling routes to China. Inflation 40%+; rial collapse; youth unemployment extremely high. Accelerating brain drain.' },
+        { label: 'Domestic', text: 'Mahsa Amini protests (2022–23): most significant unrest since 1979 revolution; crushed with ~500 killed. Mandatory hijab enforcement resumed. Internet severely restricted.' },
+        { label: 'Russia Partnership', text: 'Supplying Russia with Shahed kamikaze drones for Ukraine war in exchange for military technology, aircraft, and economic cooperation. Partnership expanding despite international pressure.' },
+      ]
+    },
+    {
+      name: 'Turkey', flag: '🇹🇷', region: 'Middle East',
+      population: '85,816,199', popRank: 18,
+      area: '783,562', areaRank: 37,
+      ruler: 'President Recep Tayyip Erdoğan (AKP)', rulerSince: 'August 2014 (PM since 2003)',
+      government: 'Presidential Republic',
+      allies: ['NATO (formal)','Qatar','Azerbaijan','Pakistan','Libya (GNA)','Ukraine (balanced)'],
+      rivals: ['Greece (Aegean, Cyprus dispute)','Kurdish PKK / SDF','USA (S-400 dispute)'],
+      policies: [
+        { label: 'Strategic Autonomy', text: 'NATO member that purchased Russian S-400 missiles, blocking Turkey from F-35 program. Balances Russia and West simultaneously — mediating Ukraine grain deal while selling Bayraktar drones to Ukraine.' },
+        { label: 'Syria', text: 'Major Syria player post-Assad fall (December 2024): Turkey-backed forces control northwest. Turkey positioned to shape post-Assad Syria\'s political future. Opposes Kurdish autonomous region on its border.' },
+        { label: 'Kurds', text: 'PKK designated terrorist; military operations in Iraq and Syria against Kurdish groups. SDF (US partner in Syria) seen as PKK affiliate — core US-Turkey friction point in NATO.' },
+        { label: 'Economy', text: 'G20 economy (~$1.1T). Severe crisis 2021–23: inflation peaked at 85%. Heterodox interest rate policy reversed; orthodox monetary tightening now applied. Lira partially recovering.' },
+        { label: 'NATO Enlargement', text: 'Blocked Sweden and Finland\'s NATO accession for 18 months extracting concessions (extraditions, arms export licenses). Eventually ratified both. Demonstrates leverage within alliance.' },
+        { label: 'Regional Power', text: 'Active in Libya, Somalia (military base), Azerbaijan (arms support vs. Armenia), Qatar, Horn of Africa. Bayraktar drone exports reshape conflicts globally. Aspires to lead the Turkic world.' },
+      ]
+    },
+    {
+      name: 'Saudi Arabia', flag: '🇸🇦', region: 'Middle East',
+      population: '36,947,025', popRank: 42,
+      area: '2,149,690', areaRank: 12,
+      ruler: 'King Salman / Crown Prince MBS (de facto ruler)', rulerSince: 'King Salman: January 2015; MBS de facto since 2017',
+      government: 'Absolute Monarchy (Islamic)',
+      allies: ['USA (security umbrella)','UAE','Bahrain','Egypt','Jordan','Pakistan'],
+      rivals: ['Iran','Houthi movement (Yemen)'],
+      policies: [
+        { label: 'Vision 2030', text: 'MBS\'s economic transformation plan: diversify from oil dependency; NEOM megacity; tourism expansion; women in workforce (from 17% to 30%+); entertainment sector creation. Progress mixed.' },
+        { label: 'Iran Détente', text: 'China-brokered Saudi-Iran diplomatic rapprochement 2023: restored relations after 7-year break. Reducing regional proxy conflict; Yemen peace process engagement. Cautious trust-building.' },
+        { label: 'Israel Normalization', text: 'Abraham Accords normalization was imminent pre-October 7, 2023. Now paused; conditional on credible Palestinian state pathway. Still the most consequential potential deal in Middle East.' },
+        { label: 'Yemen War', text: 'Led coalition against Houthis since 2015; war causing world\'s worst humanitarian crisis. Saudi-Houthi talks advancing but Houthis still attacking Red Sea shipping and Israeli territory.' },
+        { label: 'OPEC+ / Oil', text: 'Leads OPEC+ production cuts to support global oil prices; cuts extended into 2024 and 2025. Oil weaponized as geopolitical tool. Urgently building non-oil economic sectors.' },
+        { label: 'Human Rights', text: 'MBS imprisoned rivals in Ritz-Carlton (2017); Jamal Khashoggi murdered 2018; women can drive but political dissidents remain imprisoned; LGBTQ+ criminalized; death penalty applied including juveniles.' },
+      ]
+    },
+    {
+      name: 'Israel', flag: '🇮🇱', region: 'Middle East',
+      population: '9,753,000', popRank: 100,
+      area: '20,770', areaRank: 150,
+      ruler: 'Prime Minister Benjamin Netanyahu (Likud)', rulerSince: 'December 2022 (also 1996–99, 2009–21)',
+      government: 'Parliamentary Democracy',
+      allies: ['USA','Abraham Accords: UAE, Bahrain, Morocco, Sudan','India (growing ties)'],
+      rivals: ['Hamas (Gaza)','Hezbollah (Lebanon)','Iran','Houthis (Yemen)','Syria','Palestinian Authority (complex)'],
+      policies: [
+        { label: 'Gaza War', text: 'October 7, 2023 Hamas attack killed ~1,200 Israelis; Israel launched operation resulting in 50,000+ Palestinian deaths (Gaza Health Ministry). IDF dismantled Hamas military structure. Ceasefire and hostage deal reached 2025.' },
+        { label: 'Iran', text: 'Frames Iranian nuclear program as existential threat. Ongoing covert sabotage of Iranian facilities and scientists. Direct missile exchanges April and October 2024. Struck Iranian air defense systems.' },
+        { label: 'West Bank', text: 'Settlement expansion accelerating (record units approved 2024). Settler violence against Palestinians increasing with near-impunity. Far-right ministers (Ben-Gvir, Smotrich) advocating annexation.' },
+        { label: 'Judicial Reform', text: 'Netanyahu government\'s 2023 judicial reform attempt to limit Supreme Court sparked largest protests in Israeli history. Constitutional crisis ongoing even after October 7 attacks.' },
+        { label: 'Lebanon', text: 'Hezbollah significantly degraded in 2024: key leaders including Hassan Nasrallah killed; territory cleared in south Lebanon. Ceasefire November 2024; IDF withdrawal process ongoing.' },
+        { label: 'Coalition Politics', text: 'Netanyahu governs with far-right parties (Otzma Yehudit, Religious Zionism) whose demands conflict with US and international red lines on Gaza, settlements, and Palestinian Authority.' },
+      ]
+    },
+    {
+      name: 'Ethiopia', flag: '🇪🇹', region: 'Africa',
+      population: '126,527,060', popRank: 11,
+      area: '1,104,300', areaRank: 27,
+      ruler: 'Prime Minister Abiy Ahmed (Prosperity Party)', rulerSince: 'April 2018',
+      government: 'Federal Parliamentary Republic',
+      allies: ['UAE (military, investment)','China (infrastructure)','Turkey (drone sales)','Eritrea (post-2018 peace)'],
+      rivals: ['Egypt (GERD Nile dispute)','Somalia (Somaliland port deal fallout)'],
+      policies: [
+        { label: 'GERD Dam', text: 'Grand Ethiopian Renaissance Dam: Africa\'s largest power plant when complete. Filling Nile reservoir despite Egyptian and Sudanese opposition. Ethiopia sees it as essential development; Egypt sees existential threat to water supply.' },
+        { label: 'Tigray War', text: 'Two-year civil war (2020–22) between government and TPLF estimated to have killed 300,000–600,000 and caused massive famine. Pretoria peace agreement November 2022; fragile implementation.' },
+        { label: 'Sea Access', text: 'Landlocked since Eritrean independence 1993. Signed Memorandum with Somaliland for sea access in 2024 — furious reaction from Somalia which claims Somaliland as its territory. Strategic priority.' },
+        { label: 'Economy', text: 'Among fastest-growing African economies for years (8–10%/year). Severe foreign exchange shortage and debt distress requiring IMF restructuring. Coffee, floriculture, sesame key exports. Population set to hit 200M by 2050.' },
+        { label: 'Abiy Reforms', text: 'Nobel Peace Prize 2019 for Eritrea peace deal and liberalizing reforms. Subsequent Tigray civil war severely damaged his reputation. Privatizing telecoms; infrastructure investment; Addis Ababa development.' },
+        { label: 'Horn of Africa', text: 'Aspires to regional leadership in troubled Horn: engagement in Somalia, Djibouti corridor, Nile basin politics. AU headquarters host. Competes with UAE, Turkey, and Saudi Arabia for regional influence.' },
+      ]
+    },
+  ];
+
+  let activeRegion = 'All';
+
+  function buildCountryGrid() {
+    const grid = document.getElementById('countryGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    COUNTRIES.forEach((c, i) => {
+      const card = document.createElement('div');
+      card.className = 'country-card';
+      card.dataset.idx = i;
+      card.dataset.region = c.region;
+      card.dataset.name = c.name.toLowerCase();
+      card.innerHTML = `
+        <div class="country-flag">${c.flag}</div>
+        <div class="country-name">${c.name}</div>
+        <div class="country-quick">
+          Pop: <span>${c.population}</span><br>
+          Area: <span>${c.area} km²</span><br>
+          Leader: <span>${c.ruler.split('(')[0].trim()}</span>
+        </div>
+        <div class="country-gov-badge">${c.government}</div>
+      `;
+      card.onclick = () => openCountryDetail(i);
+      grid.appendChild(card);
+    });
+    filterCountries();
+  }
+
+  function filterCountries() {
+    const q = (document.getElementById('infoSearch')?.value || '').toLowerCase();
+    document.querySelectorAll('.country-card').forEach(card => {
+      const nameMatch = card.dataset.name.includes(q);
+      const regionMatch = activeRegion === 'All' || card.dataset.region === activeRegion;
+      card.classList.toggle('hidden', !nameMatch || !regionMatch);
+    });
+  }
+
+  window.setRegion = function(region, btn) {
+    activeRegion = region;
+    document.querySelectorAll('.info-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterCountries();
+  }
+
+  window.filterCountries = filterCountries;
+
+  function openCountryDetail(idx) {
+    const c = COUNTRIES[idx];
+    const card = document.getElementById('countryDetailCard');
+    if (!card) return;
+
+    const alliesTags = c.allies.map(a => `<span class="cd-tag ally">${a}</span>`).join('');
+    const rivalTags  = c.rivals.map(r => `<span class="cd-tag rival">${r}</span>`).join('');
+    const policies   = c.policies.map(p =>
+      `<div class="cd-policy"><div class="cd-policy-label">${p.label}</div><div class="cd-policy-text">${p.text}</div></div>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="cd-header">
+        <div class="cd-flag">${c.flag}</div>
+        <div class="cd-header-text">
+          <div class="cd-title">${c.name}</div>
+          <div class="cd-subtitle">${c.government} &nbsp;·&nbsp; ${c.region}</div>
+        </div>
+      </div>
+      <div class="cd-stats-row">
+        <div class="cd-stat">
+          <div class="cd-stat-label">Population</div>
+          <div class="cd-stat-value">${c.population}</div>
+          <div class="cd-stat-rank">Global rank #${c.popRank}</div>
+        </div>
+        <div class="cd-stat">
+          <div class="cd-stat-label">Area (km²)</div>
+          <div class="cd-stat-value">${c.area}</div>
+          <div class="cd-stat-rank">Global rank #${c.areaRank}</div>
+        </div>
+        <div class="cd-stat">
+          <div class="cd-stat-label">Head of Government</div>
+          <div class="cd-stat-value">${c.ruler}</div>
+          <div class="cd-stat-rank">Since ${c.rulerSince}</div>
+        </div>
+        <div class="cd-stat">
+          <div class="cd-stat-label">Government Type</div>
+          <div class="cd-stat-value">${c.government}</div>
+        </div>
+      </div>
+      <div class="cd-section">
+        <div class="cd-section-title">Allies &amp; Partners</div>
+        <div class="cd-tags">${alliesTags}</div>
+      </div>
+      <div class="cd-section">
+        <div class="cd-section-title">Rivals &amp; Tensions</div>
+        <div class="cd-tags">${rivalTags}</div>
+      </div>
+      <div class="cd-section">
+        <div class="cd-section-title">Politics &amp; Key Policies</div>
+        <div class="cd-policies">${policies}</div>
+      </div>
+    `;
+
+    document.getElementById('countryGrid').style.display = 'none';
+    document.querySelector('.info-controls').style.display = 'none';
+    document.getElementById('countryDetail').classList.add('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  window.closeCountryDetail = function() {
+    document.getElementById('countryDetail').classList.remove('open');
+    document.getElementById('countryGrid').style.display = '';
+    document.querySelector('.info-controls').style.display = '';
+  }
+
+  buildCountryGrid();
 
   renderCalendar();
 </script>
